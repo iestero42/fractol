@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yunlovex <yunlovex@student.42.fr>          +#+  +:+       +#+         #
+#    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/08/07 11:36:18 by yunlovex         ###   ########.fr        #
+#    Updated: 2023/08/15 10:26:11 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,15 @@
 NAME				=	fract-ol
 BONUS				=	fract-ol_bonus
 
+GREEN 				= 	\033[0;32m
+LIGHT_GRAY 			= 	\033[90m
+BLUE 				= 	\033[0;34m
+NC 					= 	\033[0m
+YELLOW				=	\033[93m
+
+SMILEY				=	\xF0\x9F\x98\x81
+CHECK				=	\xE2\x9C\x85
+
 LIBS_DIR			=	libs
 LIBFRACTOL			=	$(LIBS_DIR)/libfractol.a
 LIBFRACTOL_BONUS	=	$(LIBS_DIR)/libfractolbonus.a
@@ -22,8 +31,8 @@ LIBFRACTOL_BONUS	=	$(LIBS_DIR)/libfractolbonus.a
 LIBFT_DIR			=	./libft
 LIBFT				=	$(LIBFT_DIR)/libft.a
 
-MINILIBX_DIR		=	./minilibx-linux
-MINILIBX			=	$(MINILIBX)/libmlx.a
+MINILIBX_DIR		=	./minilibx
+MINILIBX			=	$(MINILIBX_DIR)/libmlx.a
 
 OBJ_DIR				=	build
 OBJBNS_DIR			=	buildbonus
@@ -43,8 +52,8 @@ CC					=	gcc
 
 CFLAGS				=	-g -Wall -Werror -Wextra $(INCLUDES)
 CFLAGS_BONUS		=	-g -Wall -Werror -Wextra $(INCLUDES_BONUS)
-LDFLAGS				=	$(LDLIBS)
-LDFLAGS_BONUS		=	$(LDLIBS_BONUS)
+LDFLAGS				=	$(LDLIBS) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
+LDFLAGS_BONUS		=	$(LDLIBS_BONUS) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 INCLUDES			=	-I$(INC_DIR) -I$(addsuffix $(INC_DIR), $(LIBFT_DIR)/) -I$(MINILIBX_DIR)
 INCLUDES_BONUS		=	-I$(INCBONUS_DIR) -I$(addsuffix $(INC_DIR), $(LIBFT_DIR)/) -I$(MINILIBX_DIR)
 
@@ -58,17 +67,12 @@ ARFLAGS 			= 	rsc
 
 # Source
 
-MAIN_FILES	=	pipex.c
+MAIN_FILES	=	fract-ol.c
 
-UTILS_FILES	=	childs.c		\
-				exec_comand.c	\
-				free.c			\
-				math_utils.c	\
-				errors.c		\
+UTILS_FILES	=	
 
 
 SRCS_FILES	= 	$(addprefix $(MAIN_DIR)/, $(MAIN_FILES)) \
-				$(addprefix $(UTILS_DIR)/, $(UTILS_FILES)) \
 
 SRCS 		=	$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 OBJS 		=	$(addprefix $(OBJ_DIR)/, $(SRCS_FILES:.c=.o))
@@ -104,6 +108,7 @@ bonus:				$(BONUS)
 
 clean:
 	make fclean -C $(LIBFT_DIR)
+	make clean -C $(MINILIBX_DIR)
 	$(RM) -r $(LIBS_DIR)
 	$(RM) -r $(OBJ_DIR)
 	$(RM) -r $(OBJBNS_DIR)
@@ -114,38 +119,48 @@ fclean:				clean
 
 re:					fclean all
 
-print-%:
-	@echo '$*=$($*)'
-
+print_mandatory:
+	@echo "\n******************************************************"
+	@echo "*                                                    *"
+	@echo "*                                                    *"
+	@echo "*              $(YELLOW)Compiling Mandatory Part$(NC)              *"
+	@echo "*                                                    *"
+	@echo "*                                                    *"
+	@echo "******************************************************"
 
 # Mandatory
 
 $(OBJ_DIR)/%.o:		$(SRC_DIR)/%.c | $(DIRS) $(LIBS_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@make print_mandatory
+	@echo "\n$(GREEN)   ---Compiling: $(LIGHT_GRAY)$<$(NC)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME):			$(OBJ_MAIN) $(LIBPIPEX) $(LIBFT) $(MINILIBX)
-	$(CC) $? $(LDFLAGS) -o $@	
+$(NAME):			$(OBJ_MAIN) $(LIBFRACTOL) $(LIBFT) $(MINILIBX)
+	@$(CC) $? $(LDFLAGS) -o $@
+	@echo "\n$(GREEN)   The program is ready.$(SMILEY) $(CHECK)$(NC)"	
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	@echo "$(GREEN)   ---Compiling: $(LIGHT_GRAY)libft$(NC)"	
+	@make -C $(LIBFT_DIR)
 
 $(MINILIBX):
-	make -C $(MINILIBX_DIR)
+	@echo "$(GREEN)   ---Compiling: $(LIGHT_GRAY)minilibx$(NC)"
+	@make -C $(MINILIBX_DIR)
 
-$(LIBPIPEX): 		$(OBJS)
-	$(AR) $(ARFLAGS) $@ $?
+$(LIBFRACTOL): 		$(OBJS)
+	@$(AR) $(ARFLAGS) $@ $?
 
 $(DIRS):
-	$(MKDIR) $@
+	@$(MKDIR) $@
 
 $(LIBS_DIR):
-	$(MKDIR) $@
+	@$(MKDIR) $@
 
 
 # Bonus
 
-$(OBJBNS_DIR)/%.o:		$(SRCBNS_DIR)/%.c | $(DIRSBONUS) $(LIBS_DIR) 
-	$(CC) $(CFLAGS_BONUS) -c $< -o $@				
+$(OBJBNS_DIR)/%.o:		$(SRCBNS_DIR)/%.c | $(DIRSBONUS) $(LIBS_DIR)
+	@$(CC) $(CFLAGS_BONUS) -c $< -o $@				
 
 $(LIBPIPEX_BONUS): 		$(OBJSBONUS)
 	$(AR) $(ARFLAGS) $@ $?
