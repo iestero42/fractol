@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/08/15 10:26:11 by iestero-         ###   ########.fr        #
+#    Updated: 2023/08/15 11:09:17 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,11 +107,12 @@ all:				$(NAME)
 bonus:				$(BONUS)
 
 clean:
-	make fclean -C $(LIBFT_DIR)
-	make clean -C $(MINILIBX_DIR)
-	$(RM) -r $(LIBS_DIR)
-	$(RM) -r $(OBJ_DIR)
-	$(RM) -r $(OBJBNS_DIR)
+	@echo "\n$(GREEN)   Deleting files...$(NC)"	
+	@make fclean -C $(LIBFT_DIR)
+	@make clean -C $(MINILIBX_DIR)
+	@$(RM) -r $(LIBS_DIR)
+	@$(RM) -r $(OBJ_DIR)
+	@$(RM) -r $(OBJBNS_DIR)
 
 fclean:				clean
 	$(RM) $(NAME)
