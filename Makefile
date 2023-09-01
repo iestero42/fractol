@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/08/15 11:09:17 by iestero-         ###   ########.fr        #
+#    Updated: 2023/09/01 12:42:54 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ INCBONUS_DIR		=	incbonus
 
 MAIN_DIR			=	main
 UTILS_DIR			=	utils
+PARSE_DIR			=	parse
 
 LDLIBS				=	$(LIBFRACTOL) $(LIBFT)
 LDLIBS_BONUS		=	$(LIBFRACTOL_BONUS) $(LIBFT)
@@ -69,14 +70,20 @@ ARFLAGS 			= 	rsc
 
 MAIN_FILES	=	fract-ol.c
 
-UTILS_FILES	=	
+PARSE_FILES	=	fractal_init.c		\
+				fractal_render.c	\
+
+UTILS_FILES	=	math_utils.c		\
+				pixel_put.c			\
 
 
-SRCS_FILES	= 	$(addprefix $(MAIN_DIR)/, $(MAIN_FILES)) \
+SRCS_FILES	= 	$(addprefix $(MAIN_DIR)/, $(MAIN_FILES)) 	\
+				$(addprefix $(UTILS_DIR)/, $(UTILS_FILES)) 	\
+				$(addprefix $(PARSE_DIR)/, $(PARSE_FILES)) 	\
 
 SRCS 		=	$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 OBJS 		=	$(addprefix $(OBJ_DIR)/, $(SRCS_FILES:.c=.o))
-DIRS		=	$(OBJ_DIR)  $(addprefix $(OBJ_DIR)/, $(MAIN_DIR) $(UTILS_DIR))
+DIRS		=	$(OBJ_DIR)  $(addprefix $(OBJ_DIR)/, $(MAIN_DIR) $(UTILS_DIR) $(PARSE_DIR))
 
 OBJ_MAIN	=	$(addprefix $(OBJ_DIR)/, $(addprefix $(MAIN_DIR)/, $(MAIN_FILES:.c=.o)))
 
@@ -136,7 +143,7 @@ $(OBJ_DIR)/%.o:		$(SRC_DIR)/%.c | $(DIRS) $(LIBS_DIR)
 	@echo "\n$(GREEN)   ---Compiling: $(LIGHT_GRAY)$<$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME):			$(OBJ_MAIN) $(LIBFRACTOL) $(LIBFT) $(MINILIBX)
+$(NAME):			$(LIBFT) $(MINILIBX) $(LIBFRACTOL) $(OBJ_MAIN)
 	@$(CC) $? $(LDFLAGS) -o $@
 	@echo "\n$(GREEN)   The program is ready.$(SMILEY) $(CHECK)$(NC)"	
 

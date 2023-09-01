@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 09:15:45 by iestero-          #+#    #+#             */
-/*   Updated: 2023/08/15 10:18:13 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:39:05 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,23 @@
 
 int	main(int agc, char **argv)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	t_fractol	*fractal;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-			&img.endian);
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	
+	if (agc == 2 && !ft_strcmp(argv[1], "mandelbrot")
+		&& !ft_strcmp(argv[1], "julia"))
+	{
+		fractal = (t_fractol *) malloc(sizeof(fractal));
+		if (!fractal)
+			perror("Error");
+		fractal->name = argv[1];
+		fractol_init(fractal);
+		fractol_render(fractal);
+		mlx_loop(fractal->mlx);
+	}
+	else
+	{
+		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
 }
