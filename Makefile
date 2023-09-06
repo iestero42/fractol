@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/09/01 12:42:54 by iestero-         ###   ########.fr        #
+#    Updated: 2023/09/06 13:17:37 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,21 @@ BLUE 				= 	\033[0;34m
 NC 					= 	\033[0m
 YELLOW				=	\033[93m
 
+MANDATORY_PART 		=	"\n ******************************************************\n				\
+						*                                                    *\n					\
+						*                                                    *\n					\
+						*                   $(YELLOW)MANDATORY PART$(NC)                   *\n		\
+						*                                                    *\n					\
+						*                                                    *\n					\
+						******************************************************\n\n"
+BONUS_PART 			=	"\n ******************************************************\n				\
+						*                                                    *\n					\
+						*                                                    *\n					\
+						*                     $(YELLOW)BONUS PART$(NC)                     *\n		\
+						*                                                    *\n					\
+						*                                                    *\n					\
+						******************************************************\n\n"					\
+
 SMILEY				=	\xF0\x9F\x98\x81
 CHECK				=	\xE2\x9C\x85
 
@@ -31,7 +46,7 @@ LIBFRACTOL_BONUS	=	$(LIBS_DIR)/libfractolbonus.a
 LIBFT_DIR			=	./libft
 LIBFT				=	$(LIBFT_DIR)/libft.a
 
-MINILIBX_DIR		=	./minilibx
+MINILIBX_DIR		=	minilibx
 MINILIBX			=	$(MINILIBX_DIR)/libmlx.a
 
 OBJ_DIR				=	build
@@ -70,8 +85,9 @@ ARFLAGS 			= 	rsc
 
 MAIN_FILES	=	fract-ol.c
 
-PARSE_FILES	=	fractal_init.c		\
-				fractal_render.c	\
+PARSE_FILES	=	fractal_init.c			\
+				fractal_render.c		\
+				colors.c				\
 
 UTILS_FILES	=	math_utils.c		\
 				pixel_put.c			\
@@ -97,6 +113,7 @@ UTILS_BONUS_FILES	=	childs_bonus.c			\
 						free_bonus.c			\
 						math_utils_bonus.c		\
 						here_doc_bonus.c		\
+						colors.c				\
 
 SRCSBONUS_FILES		=	$(addprefix $(MAIN_DIR)/, $(MAIN_BONUS_FILES)) \
 						$(addprefix $(UTILS_DIR)/, $(UTILS_BONUS_FILES)) \
@@ -114,52 +131,48 @@ all:				$(NAME)
 bonus:				$(BONUS)
 
 clean:
-	@echo "\n$(GREEN)   Deleting files...$(NC)"	
-	@make fclean -C $(LIBFT_DIR)
-	@make clean -C $(MINILIBX_DIR)
+	@make -s fclean -C $(LIBFT_DIR)
+	@make -s clean -C $(MINILIBX_DIR)
 	@$(RM) -r $(LIBS_DIR)
 	@$(RM) -r $(OBJ_DIR)
 	@$(RM) -r $(OBJBNS_DIR)
+	@echo "---- $(YELLOW)Object files deleted. $(CHECK)$(NC) ----"
 
 fclean:				clean
 	$(RM) $(NAME)
 	$(RM) $(BONUS)
+	@echo "---- $(YELLOW)Binary files deleted. $(CHECK)$(NC) ----"
 
 re:					fclean all
-
-print_mandatory:
-	@echo "\n******************************************************"
-	@echo "*                                                    *"
-	@echo "*                                                    *"
-	@echo "*              $(YELLOW)Compiling Mandatory Part$(NC)              *"
-	@echo "*                                                    *"
-	@echo "*                                                    *"
-	@echo "******************************************************"
 
 # Mandatory
 
 $(OBJ_DIR)/%.o:		$(SRC_DIR)/%.c | $(DIRS) $(LIBS_DIR)
-	@make print_mandatory
-	@echo "\n$(GREEN)   ---Compiling: $(LIGHT_GRAY)$<$(NC)"
+	@printf "\r\r\t---> $(BLUE)Compiling:\t$(LIGHT_GRAY)$<$(NC)\033[K"
+	@sleep 0.5
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME):			$(LIBFT) $(MINILIBX) $(LIBFRACTOL) $(OBJ_MAIN)
-	@$(CC) $? $(LDFLAGS) -o $@
-	@echo "\n$(GREEN)   The program is ready.$(SMILEY) $(CHECK)$(NC)"	
+$(NAME):			$(OBJ_MAIN) $(LIBFRACTOL) $(LIBFT) $(MINILIBX)
+	@$(CC) $(OBJ_MAIN) $(LDFLAGS) -o $@
+	@sleep 1
+	@echo "\n$(GREEN)The program is ready.$(SMILEY) $(CHECK)$(NC)"	
 
 $(LIBFT):
-	@echo "$(GREEN)   ---Compiling: $(LIGHT_GRAY)libft$(NC)"	
-	@make -C $(LIBFT_DIR)
+	@make -s -C $(LIBFT_DIR)
 
 $(MINILIBX):
-	@echo "$(GREEN)   ---Compiling: $(LIGHT_GRAY)minilibx$(NC)"
-	@make -C $(MINILIBX_DIR)
+	@echo "\n$(BLUE)   ---Creating: $(LIGHT_GRAY)minilibx$(NC)"
+	@make -s  -C $(MINILIBX_DIR)
+	@echo "   $(CHECK) $(GREEN)Library created.$(NC)"
 
 $(LIBFRACTOL): 		$(OBJS)
 	@$(AR) $(ARFLAGS) $@ $?
+	@echo "\n   $(CHECK) $(GREEN)Library created.$(NC)"
 
 $(DIRS):
-	@$(MKDIR) $@
+	@echo $(MANDATORY_PART)
+	@echo "\n   ---> $(BLUE)Creating:\t$(LIGHT_GRAY)libPipex$(NC)"
+	@$(MKDIR) $(DIRS)
 
 $(LIBS_DIR):
 	@$(MKDIR) $@
