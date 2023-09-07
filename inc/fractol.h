@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/09/06 13:11:40 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:53:36 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
  * 
  */
 # include "libft.h"
+# include "keys.h"
 
 /**
  * @brief 
@@ -33,8 +34,8 @@
  * @brief 
  * 
  */
-# define WIDTH	1080
-# define HEIGHT	800
+# define WIDTH	2000
+# define HEIGHT	1100
 
 /**
  * @brief 
@@ -62,6 +63,16 @@
 # define HOT_PINK        0xFF66B2  // As the name suggests!
 # define ELECTRIC_BLUE   0x0066FF  // A radiant blue
 # define LAVA_RED        0xFF3300  // A bright, molten red
+
+/**
+ * @brief 
+ * 
+ */
+typedef struct s_colors
+{
+	int				num_colors;
+	unsigned int	array_color[4];
+}	t_colors;
 
 /**
  * @brief 
@@ -104,8 +115,10 @@ typedef struct s_fractol {
 	void			*mlx;
 	void			*mlx_win;
 	double			escape_value;
-	int				iterations;
+	int				cmplx_precision;
+	int				color_quality;
 	t_data			img_data;
+	t_colors		colors;
 }	t_fractol;
 
 int			ft_strcmp(char *s1, char *s2);
@@ -133,5 +146,7 @@ int			get_r(int trgb);
 int			get_g(int trgb);
 
 int			get_b(int trgb);
+
+int			key_handler(int key, t_fractol *fractol);
 
 #endif

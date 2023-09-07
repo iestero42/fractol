@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/09/06 13:17:37 by iestero-         ###   ########.fr        #
+#    Updated: 2023/09/07 11:47:48 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,7 @@ PARSE_FILES	=	fractal_init.c			\
 
 UTILS_FILES	=	math_utils.c		\
 				pixel_put.c			\
+				events.c			\
 
 
 SRCS_FILES	= 	$(addprefix $(MAIN_DIR)/, $(MAIN_FILES)) 	\
@@ -161,7 +162,7 @@ $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
 
 $(MINILIBX):
-	@echo "\n$(BLUE)   ---Creating: $(LIGHT_GRAY)minilibx$(NC)"
+	@echo "\n   ---> $(BLUE)Creating:\t$(LIGHT_GRAY)minilibx$(NC)"
 	@make -s  -C $(MINILIBX_DIR)
 	@echo "   $(CHECK) $(GREEN)Library created.$(NC)"
 

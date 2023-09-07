@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:53 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/06 13:25:34 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:59:14 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,31 @@
  * @param iterations 
  * @return int 
  */
-static int	interpolation(double t, int color1, int color2)
+static int	interpolation( double t, unsigned int colors[], int num_colors)
 {
-	int		r_interp;
-	int		g_interp;
-	int		b_interp;
+	int		num_segments;
+	int		segment_index;
+	double	segment_t;
 
-	r_interp = (int)(get_r(color1) * (1 - t) + get_r(color2) * t);
-	g_interp = (int)(get_g(color1) * (1 - t) + get_g(color2) * t);
-	b_interp = (int)(get_b(color1) * (1 - t) + get_b(color2) * t);
-	return (create_trgb(0, r_interp, g_interp, b_interp));
+	if (num_colors < 2)
+		return (colors[0]);
+	num_segments = num_colors - 1;
+	segment_index = (int)(t * num_segments);
+	segment_t = (t * num_segments) - segment_index;
+	if (segment_index < 0)
+		segment_index = 0;
+	else if (segment_index >= num_segments)
+	{
+		segment_index = num_segments - 1;
+		segment_t = 1.0;
+	}
+	return (create_trgb(0,
+			(int)((1 - segment_t) * get_r(colors[segment_index])
+			+ segment_t * get_r(colors[segment_index + 1])),
+		(int)((1 - segment_t) * get_g(colors[segment_index])
+		+ segment_t * get_g(colors[segment_index + 1])),
+			(int)((1 - segment_t) * get_b(colors[segment_index])
+			+ segment_t * get_b(colors[segment_index + 1]))));
 }
 
 /**
@@ -47,17 +62,16 @@ static void	handle_pixel(int x, int y, t_fractol *fractal)
 
 	z.real = 0.0;
 	z.img = 0.0;
-	c.real = map(x, create_interval(-2, +2), create_interval(30, WIDTH));
-	c.img = map(y, create_interval(+2, -2), create_interval(30, HEIGHT));
-	color = BLACK;
+	c.real = map(x, create_interval(-2, +2), create_interval(150, WIDTH));
+	c.img = map(y, create_interval(+2, -2), create_interval(150, HEIGHT));
 	i = -1;
-	while (++i < fractal->iterations)
+	while (++i < fractal->cmplx_precision)
 	{
 		z = sum_complex(sqrt_complex(z), c);
 		if (hypot(z.real, z.img) > fractal->escape_value)
 		{
-			color = interpolation((double) i / fractal->iterations,
-					fractal->iterations, BLACK, RED);
+			color = interpolation((double) i / fractal->color_quality,
+					fractal->colors.array_color, fractal->colors.num_colors);
 			my_mlx_pixel_put(&fractal->img_data, x, y, color);
 			return ;
 		}
