@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/09/08 13:28:24 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:37:31 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ int			get_b(int trgb);
 
 int			key_handler(int key, t_fractol *fractol);
 
-int			mouse_handler(int button, t_fractol *fractol);
+int			mouse_handler(int button, int x, int y, t_fractol *fractol)
 
 int			close_handler(t_fractol *fractol);
 
