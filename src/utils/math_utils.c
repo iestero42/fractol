@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:19:42 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/06 12:03:23 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 09:18:13 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_strcmp(char *s1, char *s2)
 		return (ft_strncmp(s1, s2, len_s2));
 }
 
-t_interval	create_interval(int min, int max)
+t_interval	create_interval(double min, double max)
 {
 	t_interval	interval;
 

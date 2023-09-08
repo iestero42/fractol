@@ -6,11 +6,32 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:53 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/07 11:59:14 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:15:42 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/**
+ * @brief 
+ * 
+ * @param z 
+ * @param c 
+ * @param fractal 
+ */
+static void	choose_fractal(t_complex *z, t_complex *c, t_fractol *fractal)
+{	
+	if (!ft_strncmp(fractal->name, "julia", 5))
+	{
+		c->real = fractal->info_frt.z.real;
+		c->img = fractal->info_frt.z.img;
+	}
+	else
+	{
+		c->real = z->real;
+		c->img = z->img;
+	}
+}
 
 /**
  * @brief
@@ -60,14 +81,15 @@ static void	handle_pixel(int x, int y, t_fractol *fractal)
 	int			i;
 	int			color;
 
-	z.real = 0.0;
-	z.img = 0.0;
-	c.real = map(x, create_interval(-2, +2), create_interval(150, WIDTH));
-	c.img = map(y, create_interval(+2, -2), create_interval(150, HEIGHT));
+	z.real = map(x, create_interval(-1.7, +1.7), create_interval(200, WIDTH))
+		* fractal->zoom;
+	z.img = map(y, create_interval(+1.3, -1.3), create_interval(0, HEIGHT))
+		* fractal->zoom;
+	choose_fractal(&z, &c, fractal);
 	i = -1;
 	while (++i < fractal->cmplx_precision)
 	{
-		z = sum_complex(sqrt_complex(z), c);
+		z = fractal->info_frt.ft(z, c, fractal);
 		if (hypot(z.real, z.img) > fractal->escape_value)
 		{
 			color = interpolation((double) i / fractal->color_quality,

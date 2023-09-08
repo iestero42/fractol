@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:32:50 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/07 11:53:56 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 10:37:50 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * 
  * @param fractol 
  */
-static void	close_handler(t_fractol *fractol)
+int	close_handler(t_fractol *fractol)
 {
 	mlx_destroy_image(fractol->mlx,
 		fractol->img_data.img);
@@ -32,9 +32,26 @@ static void	close_handler(t_fractol *fractol)
  * 
  * @param key 
  */
-int	key_handler(int KeSym, t_fractol *fractol)
+int	key_handler(int key, t_fractol *fractol)
 {
-	if (KeSym == ESCAPE)
+	if (key == ESCAPE)
 		close_handler(fractol);
+	return (0);
+}
+
+/**
+ * @brief 
+ * 
+ * @param key 
+ * @param fractol 
+ * @return int 
+ */
+int	mouse_handler(int button, t_fractol *fractol)
+{
+	if (button == MOUSE_FWD)
+		fractol->zoom *= 0.95;
+	if (button == MOUSE_BCW)
+		fractol->zoom *= 1.05;
+	fractol_render(fractol);
 	return (0);
 }

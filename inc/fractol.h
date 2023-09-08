@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/09/07 11:53:36 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:28:24 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_colors
 	unsigned int	array_color[4];
 }	t_colors;
 
+
 /**
  * @brief 
  * 
@@ -98,6 +99,17 @@ typedef struct s_complex
  * @brief 
  * 
  */
+typedef struct s_info
+{
+	t_complex	z;
+	t_complex	(*ft)(struct s_complex, struct s_complex, t_fractol *);
+	double		power;
+}	t_info;
+
+/**
+ * @brief 
+ * 
+ */
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -117,6 +129,8 @@ typedef struct s_fractol {
 	double			escape_value;
 	int				cmplx_precision;
 	int				color_quality;
+	double			zoom;
+	t_info			info_frt;
 	t_data			img_data;
 	t_colors		colors;
 }	t_fractol;
@@ -125,7 +139,7 @@ int			ft_strcmp(char *s1, char *s2);
 
 void		fractol_init(t_fractol *fractal);
 
-t_interval	create_interval(int min, int max);
+t_interval	create_interval(double min, double max);
 
 double		map(double unscaled_num, t_interval new, t_interval old);
 
@@ -148,5 +162,15 @@ int			get_g(int trgb);
 int			get_b(int trgb);
 
 int			key_handler(int key, t_fractol *fractol);
+
+int			mouse_handler(int button, t_fractol *fractol);
+
+int			close_handler(t_fractol *fractol);
+
+double		ft_atod(char *s);
+
+unsigned long long int	binomialcoeff(int n, int k);
+
+t_complex	*choose_ft(t_complex z, t_complex c, t_fractol *fractol);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 09:15:45 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/06 10:30:49 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:15:59 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	main(int agc, char **argv)
 		|| (agc == 4 && !ft_strcmp(argv[1], "julia")))
 	{
 		fractal.name = argv[1];
+		if (!ft_strncmp(fractal.name, "julia", 5))
+		{
+			fractal.info_frt.z.real = ft_atod(argv[2]);
+			fractal.info_frt.z.img = ft_atod(argv[3]);
+		}
 		fractol_init(&fractal);
 		fractol_render(&fractal);
 		mlx_loop(fractal.mlx);

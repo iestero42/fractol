@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/09/07 11:47:48 by iestero-         ###   ########.fr        #
+#    Updated: 2023/09/08 12:53:22 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,10 +88,13 @@ MAIN_FILES	=	fract-ol.c
 PARSE_FILES	=	fractal_init.c			\
 				fractal_render.c		\
 				colors.c				\
+				choose_ft.c				\
 
 UTILS_FILES	=	math_utils.c		\
 				pixel_put.c			\
 				events.c			\
+				ft_atod.c			\
+				math_utils2.c		\
 
 
 SRCS_FILES	= 	$(addprefix $(MAIN_DIR)/, $(MAIN_FILES)) 	\

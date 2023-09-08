@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.h                                             :+:      :+:    :+:   */
+/*   math_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 11:27:50 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/08 10:54:04 by iestero-         ###   ########.fr       */
+/*   Created: 2023/09/08 12:14:39 by iestero-          #+#    #+#             */
+/*   Updated: 2023/09/08 12:53:51 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYS_H
-# define KEYS_H
+unsigned long long int	binomialcoeff(int n, int k)
+{
+	int						i;
+	unsigned long long int	result;
 
-# define ESCAPE 53
-# define MOUSE_FWD 05
-# define MOUSE_BCW 04
-
-# define KEYPRESS		02
-# define BUTTONPRESS	04
-# define DESTROYNOTIFY	17
-# define RESIZE			15
-
-#endif
+	if (k == 0 || k == n)
+		return (1);
+	result = 1;
+	i = 0;
+	while (i <= k)
+	{
+		result *= (n - i + 1);
+		result /= i;
+	}
+	return (result);
+}
