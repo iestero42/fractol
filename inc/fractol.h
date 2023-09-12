@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/09/08 13:37:31 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:33:28 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
  * @brief 
  * 
  */
-# define WIDTH	2000
-# define HEIGHT	1100
+# define WIDTH	1920
+# define HEIGHT	1080
 
 /**
  * @brief 
@@ -50,9 +50,10 @@
 # define WHITE       0x80FFFFFF  // RGB(255, 255, 255)
 # define RED         0xFF0000  // RGB(255, 0, 0)
 # define GREEN       0x8000FF00  // RGB(0, 255, 0)
-# define BLUE        0x800000FF  // RGB(0, 0, 255)
+# define BLUE        0x2D8DA5  // RGB(0, 0, 255)
 # define ORANGE		 0xFFA500
 # define YELLOW 	 0xFFFF00
+# define PINK		 0x871E72
 
 // Psychedelic colors
 # define MAGENTA_BURST   0xFF00FF  // A vibrant magenta
@@ -74,17 +75,6 @@ typedef struct s_colors
 	unsigned int	array_color[4];
 }	t_colors;
 
-
-/**
- * @brief 
- * 
- */
-typedef struct s_interval
-{
-	double	min;
-	double	max;
-}	t_interval;
-
 /**
  * @brief 
  * 
@@ -99,17 +89,6 @@ typedef struct s_complex
  * @brief 
  * 
  */
-typedef struct s_info
-{
-	t_complex	z;
-	t_complex	(*ft)(struct s_complex, struct s_complex, t_fractol *);
-	double		power;
-}	t_info;
-
-/**
- * @brief 
- * 
- */
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -117,6 +96,18 @@ typedef struct s_data {
 	int		line_length;
 	int		endian;
 }	t_data;
+
+/**
+ * @brief 
+ * 
+ */
+typedef struct s_info
+{
+	t_complex	z;
+	char		*name;
+	t_complex	(*ft)(struct s_complex, struct s_complex, void *param);
+	double		power;
+}	t_info;
 
 /**
  * @brief 
@@ -135,13 +126,13 @@ typedef struct s_fractol {
 	t_colors		colors;
 }	t_fractol;
 
+
+
 int			ft_strcmp(char *s1, char *s2);
 
 void		fractol_init(t_fractol *fractal);
 
-t_interval	create_interval(double min, double max);
-
-double		map(double unscaled_num, t_interval new, t_interval old);
+double		map(double unscaled_num, double new_min, double new_max, double old_max);
 
 t_complex	sum_complex(t_complex num1, t_complex num2);
 
@@ -149,7 +140,7 @@ t_complex	sqrt_complex(t_complex num);
 
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-void		fractol_render(t_fractol *fractal);
+int			fractol_render(t_fractol *fractal);
 
 int			create_trgb(int t, int r, int g, int b);
 
@@ -163,7 +154,7 @@ int			get_b(int trgb);
 
 int			key_handler(int key, t_fractol *fractol);
 
-int			mouse_handler(int button, int x, int y, t_fractol *fractol)
+int			mouse_handler(int button, int x, int y, t_fractol *fractol);
 
 int			close_handler(t_fractol *fractol);
 
@@ -171,6 +162,20 @@ double		ft_atod(char *s);
 
 unsigned long long int	binomialcoeff(int n, int k);
 
-t_complex	*choose_ft(t_complex z, t_complex c, t_fractol *fractol);
+void		*choose_ft(t_fractol *fractol);
+
+t_complex	mandelbrot(t_complex z, t_complex c, t_fractol *fractol);
+
+t_complex	final_sum(t_complex z, t_complex c, t_fractol *fractol);
+
+t_complex	polinomic_exp_ft(t_complex z, t_complex c, t_fractol *fractol);
+
+t_complex	polinomic_sin_ft(t_complex z, t_complex c, t_fractol *fractol);
+
+t_complex	polinomic_ft(t_complex z, double n);
+
+t_complex	z2_over_ln_z_ft(t_complex z, t_complex c, t_fractol *fractol);
+
+t_complex	polinomic_sqrt_sinh_ft(t_complex z, t_complex c, t_fractol *fractol);
 
 #endif

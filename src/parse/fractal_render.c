@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:53 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/08 13:15:42 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:00:45 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,9 @@ static int	interpolation( double t, unsigned int colors[], int num_colors)
 	int		segment_index;
 	double	segment_t;
 
-	if (num_colors < 2)
-		return (colors[0]);
 	num_segments = num_colors - 1;
 	segment_index = (int)(t * num_segments);
 	segment_t = (t * num_segments) - segment_index;
-	if (segment_index < 0)
-		segment_index = 0;
-	else if (segment_index >= num_segments)
-	{
-		segment_index = num_segments - 1;
-		segment_t = 1.0;
-	}
 	return (create_trgb(0,
 			(int)((1 - segment_t) * get_r(colors[segment_index])
 			+ segment_t * get_r(colors[segment_index + 1])),
@@ -81,16 +72,14 @@ static void	handle_pixel(int x, int y, t_fractol *fractal)
 	int			i;
 	int			color;
 
-	z.real = map(x, create_interval(-1.7, +1.7), create_interval(200, WIDTH))
-		* fractal->zoom;
-	z.img = map(y, create_interval(+1.3, -1.3), create_interval(0, HEIGHT))
-		* fractal->zoom;
+	z.real = map(x, -2, +2, WIDTH) * fractal->zoom;
+	z.img = map(y, +1.3, -1.3, HEIGHT) * fractal->zoom;
 	choose_fractal(&z, &c, fractal);
 	i = -1;
 	while (++i < fractal->cmplx_precision)
 	{
 		z = fractal->info_frt.ft(z, c, fractal);
-		if (hypot(z.real, z.img) > fractal->escape_value)
+		if (hypot(z.real, z.img) >= fractal->escape_value)
 		{
 			color = interpolation((double) i / fractal->color_quality,
 					fractal->colors.array_color, fractal->colors.num_colors);
@@ -106,7 +95,7 @@ static void	handle_pixel(int x, int y, t_fractol *fractal)
  * 
  * @param fractal 
  */
-void	fractol_render(t_fractol *fractal)
+int	fractol_render(t_fractol *fractal)
 {
 	int	x;
 	int	y;
@@ -122,4 +111,5 @@ void	fractol_render(t_fractol *fractal)
 	}
 	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win,
 		fractal->img_data.img, 0, 0);
+	return (0);
 }

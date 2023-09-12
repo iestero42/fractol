@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:14:39 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/08 12:53:51 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:11:46 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ unsigned long long int	binomialcoeff(int n, int k)
 	{
 		result *= (n - i + 1);
 		result /= i;
+		i++;
 	}
 	return (result);
 }

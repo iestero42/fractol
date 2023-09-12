@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:19:42 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/08 09:18:13 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:29:29 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,10 @@ int	ft_strcmp(char *s1, char *s2)
 		return (ft_strncmp(s1, s2, len_s2));
 }
 
-t_interval	create_interval(double min, double max)
+double	map(double unscaled_num, double new_min, double new_max, double old_max)
 {
-	t_interval	interval;
-
-	interval.max = max;
-	interval.min = min;
-	return (interval);
-}
-
-double	map(double unscaled_num, t_interval new, t_interval old)
-{
-	return ((new.max - new.min) * (unscaled_num - old.min)
-		/ (old.max - old.min) + new.min);
+	return ((new_max - new_min) * (unscaled_num - 0)
+		/ (old_max - 0) + new_min);
 }
 
 t_complex	sum_complex(t_complex num1, t_complex num2)
