@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:37 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/12 13:05:01 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:30:36 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ static void	colors_init(t_fractol *fractol)
  */
 static void	data_init(t_fractol *fractol)
 {
-	fractol->escape_value = 2;
-	fractol->cmplx_precision = 42;
+	fractol->escape_value = 1;
+	fractol->cmplx_precision = 20;
 	fractol->color_quality = 50;
 	colors_init(fractol);
 	fractol->zoom = 1.0;
+	fractol->info_frt.shift_x = 0.2;
+	fractol->info_frt.shift_y = 0.7;
+	fractol->button_pressed = 0;
 }
 
 /**
@@ -60,6 +63,9 @@ static void	event_init(t_fractol *fractol)
 	mlx_hook(fractol->mlx_win, KEYPRESS, 1L << 0, key_handler, fractol);
 	mlx_hook(fractol->mlx_win, DESTROYNOTIFY, 1L << 17, close_handler, fractol);
 	mlx_hook(fractol->mlx_win, BUTTONPRESS, 1L << 2, mouse_handler, fractol);
+	mlx_hook(fractol->mlx_win, BUTTONRELEASE, 1L << 3,
+		mouse__release_handler, fractol);
+	mlx_hook(fractol->mlx_win, MOTIONNOTIFY, 1L << 8, julia_track, fractol);
 }
 
 /**

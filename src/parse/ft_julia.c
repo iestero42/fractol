@@ -6,58 +6,41 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 09:21:46 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/12 13:13:08 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/14 10:45:41 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_complex	polinomic_ft(t_complex z, double n)
-{
-	unsigned long long int	coefficient;
-	t_complex				t;
-	int						k;
-
-	k = 0;
-	while (k <= n)
-	{
-		coefficient = binomialcoeff(n, k);
-		t.real = coefficient * pow(z.real, n - k) * pow(z.img, k);
-		t.img = 0;
-		if (k % 2 == 1)
-			t.img = coefficient * pow(z.real, n - k) * pow(z.img, k);
-		k++;
-	}
-	return (t);
-}
-
 t_complex	final_sum(t_complex z, t_complex c, t_fractol *fractol)
 {
-	return (sum_complex(polinomic_ft(z, fractol->info_frt.power), c));
+	return (sum_complex(power_complex(z, fractol->info_frt.power), c));
 }
 
 t_complex	polinomic_exp_ft(t_complex z, t_complex c, t_fractol *fractol)
 {
 	t_complex	t;
+	t_complex	result;
 
-	t = polinomic_ft(z, fractol->info_frt.power);
-	t.real = exp(t.real);
-	t.img = exp(t.img);
-	return (sum_complex(t, c));
+	t = power_complex(z, fractol->info_frt.power);
+	result.real = exp(t.real) * cos(t.img);
+	result.img = exp(t.real) * sin(t.img);
+	return (sum_complex(result, c));
 }
 
 t_complex	polinomic_sin_ft(t_complex z, t_complex c, t_fractol *fractol)
 {
 	t_complex	t;
+	t_complex	result;
 
-	t = polinomic_ft(z, fractol->info_frt.power);
-	t.real = sin(t.real);
-	t.img = sin(t.img);
-	return (sum_complex(t, c));
+	t = power_complex(z, fractol->info_frt.power);
+	result.real = sin(t.real) * cosh(t.img);
+	result.img = sin(t.real) * sinh(t.img);
+	return (sum_complex(result, c));
 }
 
 t_complex	mandelbrot(t_complex z, t_complex c, t_fractol *fractol)
 {
 	fractol->info_frt.name = "Mandelbrot";
-	return (sum_complex(sqrt_complex(z), c));
+	return (sum_complex(power_complex(z, 2), c));
 }

@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:19:42 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/12 11:29:29 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/14 11:22:25 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,28 @@ t_complex	sum_complex(t_complex num1, t_complex num2)
 	return (result);
 }
 
-t_complex	sqrt_complex(t_complex num)
+t_complex	power_complex(t_complex num, int n)
 {
 	t_complex	result;
+	double		angle;
+	double		magnitude;
 
-	result.real = pow(num.real, 2) - pow(num.img, 2);
-	result.img = 2 * num.real * num.img;
+	magnitude = sqrt(num.real * num.real + num.img * num.img);
+	angle = atan2(num.img, num.real);
+	magnitude = pow(magnitude, n);
+	angle = angle * n;
+	result.real = magnitude * cos(angle);
+	result.img = magnitude * sin(angle);
+	return (result);
+}
+
+t_complex	divide_complex(t_complex a, t_complex b)
+{
+	t_complex	result;
+	double		denominator;
+
+	denominator = b.real * b.real + b.img * b.img;
+	result.real = (a.real * b.real + a.img * b.img) / denominator;
+	result.img = (a.img * b.real - a.real * b.img) / denominator;
 	return (result);
 }

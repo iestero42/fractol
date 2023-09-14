@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/09/12 12:33:28 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:04:07 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,13 @@ typedef struct s_data {
  */
 typedef struct s_info
 {
-	t_complex	z;
 	char		*name;
+	t_complex	z;
 	t_complex	(*ft)(struct s_complex, struct s_complex, void *param);
 	double		power;
+	double		shift_x;
+	double      shift_y;
+	
 }	t_info;
 
 /**
@@ -117,10 +120,11 @@ typedef struct s_fractol {
 	char			*name;
 	void			*mlx;
 	void			*mlx_win;
-	double			escape_value;
 	int				cmplx_precision;
 	int				color_quality;
+	int				button_pressed;
 	double			zoom;
+	double			escape_value;
 	t_info			info_frt;
 	t_data			img_data;
 	t_colors		colors;
@@ -135,8 +139,6 @@ void		fractol_init(t_fractol *fractal);
 double		map(double unscaled_num, double new_min, double new_max, double old_max);
 
 t_complex	sum_complex(t_complex num1, t_complex num2);
-
-t_complex	sqrt_complex(t_complex num);
 
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
@@ -172,10 +174,16 @@ t_complex	polinomic_exp_ft(t_complex z, t_complex c, t_fractol *fractol);
 
 t_complex	polinomic_sin_ft(t_complex z, t_complex c, t_fractol *fractol);
 
-t_complex	polinomic_ft(t_complex z, double n);
-
 t_complex	z2_over_ln_z_ft(t_complex z, t_complex c, t_fractol *fractol);
 
 t_complex	polinomic_sqrt_sinh_ft(t_complex z, t_complex c, t_fractol *fractol);
+
+int			julia_track(int x, int y, t_fractol *fractal);
+
+t_complex	power_complex(t_complex num, int n);
+
+t_complex	divide_complex(t_complex a, t_complex b);
+
+int			mouse__release_handler(int button, int x, int y, t_fractol *fractol);
 
 #endif

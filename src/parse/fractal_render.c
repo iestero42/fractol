@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:53 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/12 13:00:45 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:30:17 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ static void	handle_pixel(int x, int y, t_fractol *fractal)
 	int			i;
 	int			color;
 
-	z.real = map(x, -2, +2, WIDTH) * fractal->zoom;
-	z.img = map(y, +1.3, -1.3, HEIGHT) * fractal->zoom;
+	z.real = map(x, -2, +2, WIDTH) * fractal->zoom
+		+ fractal->info_frt.shift_x;
+	z.img = map(y, +1.3, -1.3, HEIGHT) * fractal->zoom
+		+ fractal->info_frt.shift_y;
 	choose_fractal(&z, &c, fractal);
 	i = -1;
 	while (++i < fractal->cmplx_precision)

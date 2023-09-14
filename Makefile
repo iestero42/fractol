@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/09/12 11:51:05 by iestero-         ###   ########.fr        #
+#    Updated: 2023/09/14 09:34:13 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,6 @@ UTILS_FILES	=	math_utils.c		\
 				pixel_put.c			\
 				events.c			\
 				ft_atod.c			\
-				math_utils2.c		\
 
 
 SRCS_FILES	= 	$(addprefix $(MAIN_DIR)/, $(MAIN_FILES)) 	\
