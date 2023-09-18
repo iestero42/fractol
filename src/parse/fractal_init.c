@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:37 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/14 12:30:36 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:36:58 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	mlx_error(char *msg_error)
 static void	colors_init(t_fractol *fractol)
 {
 	fractol->colors.num_colors = 4;
-	fractol->colors.array_color[0] = PINK;
+	fractol->colors.array_color[0] = BLACK;
 	fractol->colors.array_color[1] = BLUE;
 	fractol->colors.array_color[2] = YELLOW;
 	fractol->colors.array_color[3] = LAVA_RED;
@@ -43,14 +43,15 @@ static void	colors_init(t_fractol *fractol)
  */
 static void	data_init(t_fractol *fractol)
 {
-	fractol->escape_value = 1;
-	fractol->cmplx_precision = 20;
+	fractol->escape_value = 2;
+	fractol->cmplx_precision = 42;
 	fractol->color_quality = 50;
 	colors_init(fractol);
 	fractol->zoom = 1.0;
-	fractol->info_frt.shift_x = 0.2;
-	fractol->info_frt.shift_y = 0.7;
+	fractol->info_frt.shift_x = 0.0;
+	fractol->info_frt.shift_y = 0.0;
 	fractol->button_pressed = 0;
+	mlx_
 }
 
 /**

@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/09/14 09:34:13 by iestero-         ###   ########.fr        #
+#    Updated: 2023/09/18 09:30:55 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -175,6 +175,7 @@ $(LIBFRACTOL): 		$(OBJS)
 	@echo "\n   $(CHECK) $(GREEN)Library created.$(NC)"
 
 $(DIRS):
+	@clear
 	@echo $(MANDATORY_PART)
 	@echo "\n   ---> $(BLUE)Creating:\t$(LIGHT_GRAY)libPipex$(NC)"
 	@$(MKDIR) $(DIRS)

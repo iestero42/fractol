@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/09/14 12:04:07 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:22:21 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 # define WIDTH	1920
 # define HEIGHT	1080
 
+# define WIDTH_FRACTAL 960
+# define HEIGHT_FRACTAL 540
+
 /**
  * @brief 
  * 
@@ -47,7 +50,7 @@
  * COLORS
 */
 # define BLACK       0x000000  // RGB(0, 0, 0)
-# define WHITE       0x80FFFFFF  // RGB(255, 255, 255)
+# define WHITE       0xFFFFFF  // RGB(255, 255, 255)
 # define RED         0xFF0000  // RGB(255, 0, 0)
 # define GREEN       0x8000FF00  // RGB(0, 255, 0)
 # define BLUE        0x2D8DA5  // RGB(0, 0, 255)

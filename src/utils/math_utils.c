@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:19:42 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/14 11:22:25 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:10:47 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_complex	power_complex(t_complex num, int n)
 	double		angle;
 	double		magnitude;
 
-	magnitude = sqrt(num.real * num.real + num.img * num.img);
+	magnitude = hypot(num.real, num.img);
 	angle = atan2(num.img, num.real);
 	magnitude = pow(magnitude, n);
 	angle = angle * n;
