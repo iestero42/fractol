@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/09/18 11:22:21 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:19:53 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@
  */
 # define WIDTH	1920
 # define HEIGHT	1080
-
-# define WIDTH_FRACTAL 960
-# define HEIGHT_FRACTAL 540
 
 /**
  * @brief 

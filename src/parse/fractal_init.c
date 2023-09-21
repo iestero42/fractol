@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:37 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/18 11:36:58 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:50:07 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	data_init(t_fractol *fractol)
 	fractol->info_frt.shift_x = 0.0;
 	fractol->info_frt.shift_y = 0.0;
 	fractol->button_pressed = 0;
-	mlx_
+
 }
 
 /**

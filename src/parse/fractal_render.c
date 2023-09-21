@@ -6,11 +6,31 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:53 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/18 11:35:02 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:57:47 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/**
+ * @brief 
+ * 
+ * @param fractal 
+ */
+static void	fractal_render_img(t_fractol *fractal)
+{
+	int		width;
+	int		height;
+	t_data	win;
+
+	win.img = mlx_xpm_file_to_image(fractal->mlx, "./images/controls.xpm",
+			&width, &height);
+	win.addr = mlx_get_data_addr(win.img,
+			&win.bits_per_pixel,
+			&win.line_length, &win.endian);
+	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win, win.img,
+		1200, 0);
+}
 
 /**
  * @brief 
@@ -47,9 +67,9 @@ static void	handle_pixel(int x, int y, t_fractol *fractal)
 	int			i;
 	int			color;
 
-	z.real = map(x, -2, +2, WIDTH_FRACTAL) * fractal->zoom
+	z.real = map(x, -2, +2, WIDTH / 1.5) * fractal->zoom
 		+ fractal->info_frt.shift_x;
-	z.img = map(y, +1.3, -1.3, HEIGHT_FRACTAL) * fractal->zoom
+	z.img = map(y, +1.3, -1.3, HEIGHT / 1.5) * fractal->zoom
 		+ fractal->info_frt.shift_y;
 	choose_fractal(&z, &c, fractal);
 	i = -1;
@@ -77,36 +97,17 @@ int	fractol_render(t_fractol *fractal)
 	int	y;
 
 	y = -1;
-	while (++y < HEIGHT_FRACTAL)
+	while (++y < HEIGHT / 1.5)
 	{
 		x = -1;
-		while (++x < WIDTH_FRACTAL)
+		while (++x < WIDTH / 1.5)
 		{
 			handle_pixel(x, y, fractal);
 		}
 	}
 	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win,
-		fractal->img_data.img, (WIDTH - WIDTH_FRACTAL) / 3,
-		(HEIGHT - HEIGHT_FRACTAL) / 2);
+		fractal->img_data.img, (WIDTH - (WIDTH / 1.5)) / 20,
+		(HEIGHT - (HEIGHT / 1.5)) / 2);
+	fractal_render_img(fractal);
 	return (0);
-}
-
-/**
- * @brief 
- * 
- */
-int	fractol_inst(t_fractol *fractal)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < HEIGHT)
-	{
-		x = -1;
-		while (++x < WIDTH_FRACTAL)
-		{
-			handle_pixel(x, y, fractal);
-		}
-	}
 }
