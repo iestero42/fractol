@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:32:50 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/21 11:46:17 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:39:32 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ int	julia_track(int x, int y, t_fractol *fractal)
 	if (!ft_strcmp(fractal->name, "julia") && fractal->button_pressed)
 	{
 		fractal->info_frt.z.real = (map(x, -2, +2, WIDTH / 1.5)
-				* fractal->zoom) + fractal->info_frt.shift_x;
+				* fractal->zoom);
 		fractal->info_frt.z.img = (map(y, +1.3, -1.3, HEIGHT / 1.5)
-				* fractal->zoom) + fractal->info_frt.shift_y;
+				* fractal->zoom);
 		fractol_render(fractal);
 	}
 	return (0);

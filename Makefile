@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/09/18 09:30:55 by iestero-         ###   ########.fr        #
+#    Updated: 2023/09/28 11:33:21 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,6 @@ PARSE_FILES	=	fractal_init.c			\
 				colors.c				\
 				choose_ft.c				\
 				ft_julia.c				\
-				ft_julia2.c				\
 
 UTILS_FILES	=	math_utils.c		\
 				pixel_put.c			\

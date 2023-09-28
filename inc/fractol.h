@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/09/21 09:19:53 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:47:27 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,16 @@
  * @brief 
  * 
  */
-# define ERROR_MESSAGE "FUCK"
+# define ERROR_MESSAGE "\n usage: /fract-ol [set] [function] [real] [img] \n \
+\t\t  [power]						  \n\n \
+If the the set is mandelbrot, you only need to put the first parameter. For example: \n \
+\t -> /fract-ol mandelbrot \n\n \
+If the set is julia, you have to put all the parameters. For example: \n \
+\t -> /fract-ol julia polinomic 0.2 0 2 \n\n \
+The possible values for the function parameter are: \n \
+\t -> polinomic \n \
+\t -> polinomic-exp \n \
+\t -> polinomic-sin \n "
 
 /*
  * COLORS
@@ -107,8 +116,6 @@ typedef struct s_info
 	t_complex	z;
 	t_complex	(*ft)(struct s_complex, struct s_complex, void *param);
 	double		power;
-	double		shift_x;
-	double      shift_y;
 	
 }	t_info;
 
@@ -121,7 +128,6 @@ typedef struct s_fractol {
 	void			*mlx;
 	void			*mlx_win;
 	int				cmplx_precision;
-	int				color_quality;
 	int				button_pressed;
 	double			zoom;
 	double			escape_value;
