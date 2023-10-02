@@ -6,12 +6,20 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:17:56 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/12 12:16:20 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:31:19 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/**
+ * @brief 
+ * 
+ * @param data 
+ * @param x 
+ * @param y 
+ * @param color 
+ */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	int	offset;

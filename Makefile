@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/09/28 11:33:21 by iestero-         ###   ########.fr        #
+#    Updated: 2023/10/02 09:15:41 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,22 +109,25 @@ OBJ_MAIN	=	$(addprefix $(OBJ_DIR)/, $(addprefix $(MAIN_DIR)/, $(MAIN_FILES:.c=.o
 
 # Source Bonus
 
-MAIN_BONUS_FILES	=	pipex_bonus.c			\
+MAIN_BONUS_ILES		=	fract-ol_bonus.c
 
-UTILS_BONUS_FILES	=	childs_bonus.c			\
-						errors_bonus.c			\
-						exec_comand_bonus.c		\
-						free_bonus.c			\
-						math_utils_bonus.c		\
-						here_doc_bonus.c		\
-						colors.c				\
+PARSE_BONUS_FILES	=	fractal_init_bonus.c			\
+						fractal_render_bonus.c			\
+						choose_ft_bonus.c				\
+						ft_julia_bonus.c				\
 
-SRCSBONUS_FILES		=	$(addprefix $(MAIN_DIR)/, $(MAIN_BONUS_FILES)) \
-						$(addprefix $(UTILS_DIR)/, $(UTILS_BONUS_FILES)) \
+UTILS_BONUS_FILES	=	math_utils_bonus.c			\
+						pixel_put_bonus.c			\
+						events_bonus.c				\
+						ft_atod_bonus.c				\
+
+SRCSBONUS_FILES		=	$(addprefix $(MAIN_DIR)/, $(MAIN_BONUS_ILES)) 		\
+						$(addprefix $(UTILS_DIR)/, $(UTILS_BONUS_FILES)) 	\
+						$(addprefix $(PARSE_DIR)/, $(PARSE_BONUS_FILES)) 	\
 
 SRCSBONUS 			=	$(addprefix $(SRCBNS_DIR)/, $(SRCSBONUS_FILES))
 OBJSBONUS 			=	$(addprefix $(OBJBNS_DIR)/, $(SRCSBONUS_FILES:.c=.o))
-DIRSBONUS			=	$(OBJBNS_DIR) $(addprefix $(OBJBNS_DIR)/, $(UTILS_DIR) $(MAIN_DIR))
+DIRSBONUS			=	$(OBJBNS_DIR) $(addprefix $(OBJBNS_DIR)/, $(UTILS_DIR) $(MAIN_DIR) $(PARSE_DIR))
 
 OBJBONUS_MAIN		=	$(addprefix $(OBJBNS_DIR)/, $(addprefix $(MAIN_DIR)/, $(MAIN_BONUS_FILES:.c=.o)))
 
@@ -176,7 +179,7 @@ $(LIBFRACTOL): 		$(OBJS)
 $(DIRS):
 	@clear
 	@echo $(MANDATORY_PART)
-	@echo "\n   ---> $(BLUE)Creating:\t$(LIGHT_GRAY)libPipex$(NC)"
+	@echo "\n   ---> $(BLUE)Creating:\t$(LIGHT_GRAY)libFractol$(NC)"
 	@$(MKDIR) $(DIRS)
 
 $(LIBS_DIR):
@@ -186,17 +189,24 @@ $(LIBS_DIR):
 # Bonus
 
 $(OBJBNS_DIR)/%.o:		$(SRCBNS_DIR)/%.c | $(DIRSBONUS) $(LIBS_DIR)
+	@printf "\r\r\t---> $(BLUE)Compiling:\t$(LIGHT_GRAY)$<$(NC)\033[K"
+	@sleep 0.5
 	@$(CC) $(CFLAGS_BONUS) -c $< -o $@				
 
-$(LIBPIPEX_BONUS): 		$(OBJSBONUS)
-	$(AR) $(ARFLAGS) $@ $?
+$(LIBFRACTOL_BONUS): 		$(OBJSBONUS)
+	@$(AR) $(ARFLAGS) $@ $?
+	@echo "\n   $(CHECK) $(GREEN)Library created.$(NC)"
 
 $(DIRSBONUS):
-	$(MKDIR) $@
+	@clear
+	@echo $(BONUS_PART)
+	@echo "\n   ---> $(BLUE)Creating:\t$(LIGHT_GRAY)libFractolBonus$(NC)"
+	@$(MKDIR) $(DIRSBONUS)
 
-$(BONUS):				$(OBJBONUS_MAIN) $(LIBPIPEX_BONUS) $(LIBFT) 
-	$(CC) $? $(LDFLAGS_BONUS) -o $(NAME)
-	@touch $@	
+$(BONUS):				$(OBJBONUS_MAIN) $(LIBFRACTOL_BONUS) $(LIBFT) $(MINILIBX)
+	@$(CC) $(OBJBONUS_MAIN) $(LDFLAGS_BONUS) -o $@
+	@sleep 1
+	@echo "\n$(GREEN)The program is ready.$(SMILEY) $(CHECK)$(NC)"	
 
 .SILENT:			clean fclean
 .PHONY:				all clean fclean re bonus

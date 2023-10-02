@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractal_render.c                                   :+:      :+:    :+:   */
+/*   fractal_render_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:53 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/29 11:50:11 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:03:44 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 /**
  * @brief 
@@ -53,22 +53,19 @@ static void	choose_fractal(t_complex *z, t_complex *c, t_fractol *fractal)
 	}
 }
 
-/**
- * @brief
- * 
- * @param i 
- * @param iterations 
- * @return int 
- */
-static int	interpolation( double t)
+static void grid(t_fractol *fractal)
 {
-	int	raw_color;
-
-	raw_color = create_trgb(0,
-		(int)(9 * ( 1 - t ) * t * t * t  * 255),
-		(int)(15 * ( 1 - t ) * t * t * 255),
-		(int)(8.5 * ( 1 - t ) * t * 120));
-	return (raw_color % 0xFFFFFF);
+	int y, x;
+	
+	y = (HEIGHT / 1.5) / 2;
+    for (x = 0; x < WIDTH / 1.5; x++)
+        my_mlx_pixel_put(&fractal->img_data, x, y, WHITE);// Color rojo
+	y = 0;
+    for (x = 0; x < WIDTH / 1.5; x++)
+        my_mlx_pixel_put(&fractal->img_data, x, y, WHITE);// Color rojo
+    x = (WIDTH / 1.5) / 2;
+    for (y = 0; y < HEIGHT / 1.5; y++)
+        my_mlx_pixel_put(&fractal->img_data, x, y, WHITE); // Color rojo
 }
 
 /**
@@ -85,8 +82,10 @@ static void	handle_pixel(int x, int y, t_fractol *fractal)
 	int			i;
 	int			color;
 
-	z.real = map(x, -2, +2, WIDTH / 1.5) * fractal->zoom;
-	z.img = map(y, +1.3, -1.3, HEIGHT / 1.5) * fractal->zoom;
+	z.real = (map(x, -2, +2, WIDTH / 1.5) + fractal->info_frt.shift_x)
+		* fractal->zoom;
+	z.img = (map(y, +1.3, -1.3, HEIGHT / 1.5) + fractal->info_frt.shift_y)
+		* fractal->zoom;
 	choose_fractal(&z, &c, fractal);
 	i = -1;
 	while (++i < fractal->cmplx_precision)
@@ -94,7 +93,7 @@ static void	handle_pixel(int x, int y, t_fractol *fractal)
 		z = fractal->info_frt.ft(z, c, fractal);
 		if (hypot(z.real, z.img) >= fractal->escape_value)
 		{
-			color = interpolation((double) i / fractal->cmplx_precision);
+			color = map(i, BLACK, WHITE, fractal->cmplx_precision);
 			my_mlx_pixel_put(&fractal->img_data, x, y, color);
 			return ;
 		}
@@ -121,6 +120,7 @@ int	fractol_render(t_fractol *fractal)
 			handle_pixel(x, y, fractal);
 		}
 	}
+	grid(fractal);
 	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win,
 		fractal->img_data.img, (WIDTH - (WIDTH / 1.5)) / 20,
 		(HEIGHT - (HEIGHT / 1.5)) / 2);

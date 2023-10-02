@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_julia.c                                         :+:      :+:    :+:   */
+/*   ft_julia_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 09:21:46 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/29 08:31:19 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/09/29 08:58:24 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 t_complex	final_sum(t_complex z, t_complex c, t_fractol *fractol)
 {

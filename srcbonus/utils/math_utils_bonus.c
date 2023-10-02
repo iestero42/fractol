@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_utils.c                                       :+:      :+:    :+:   */
+/*   math_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:19:42 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/29 08:31:19 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:26:56 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 /**
  * @brief 
@@ -43,8 +43,13 @@ int	ft_strcmp(char *s1, char *s2)
  */
 double	map(double unscaled_num, double new_min, double new_max, double old_max)
 {
-	return ((new_max - new_min) * (unscaled_num - 0)
-		/ (old_max - 0) + new_min);
+	if (unscaled_num < 0)
+		unscaled_num = 0;
+	else if (unscaled_num > old_max)
+		unscaled_num = old_max;
+    double porcentaje = (unscaled_num - 0) / (old_max - 0);
+    double valorMapeado = new_min + porcentaje * (new_max - new_min);
+	return valorMapeado;
 }
 
 /**

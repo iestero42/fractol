@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.h                                            :+:      :+:    :+:   */
+/*   pixel_put_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 10:01:25 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/12 10:07:13 by iestero-         ###   ########.fr       */
+/*   Created: 2023/08/15 10:17:56 by iestero-          #+#    #+#             */
+/*   Updated: 2023/09/29 11:03:52 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef JULIA_H
-# define JULIA_H
-
-# include "fractol.h"
+#include "fractol_bonus.h"
 
 /**
  * @brief 
  * 
+ * @param data 
+ * @param x 
+ * @param y 
+ * @param color 
  */
-typedef struct s_julia
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	struct s_complex	z;
-	char				*name;
-	struct s_complex	(*ft)(struct s_complex, struct s_complex,
-			struct s_fractol *);
-	double				power;
-}	t_julia;
+	int	offset;
 
-#endif
+	offset = (y * data->line_length) + (x * (data->bits_per_pixel / 8));
+	*(unsigned int *)(data->addr + offset) = color;
+}

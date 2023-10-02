@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/09/29 08:34:55 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:33:31 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTOL_BONUS_H
+# define FRACTOL_BONUS_H
 
 /**
  * @brief 
  * 
  */
 # include "libft.h"
-# include "structs.h"
-# include "events.h"
-# include "colors.h"
-# include "complex_math.h"
+# include "structs_bonus.h"
+# include "events_bonus.h"
+# include "complex_math_bonus.h"
 
 /**
  * @brief 
@@ -39,6 +38,13 @@
  */
 # define WIDTH	1920
 # define HEIGHT	1080
+
+/**
+ * @brief 
+ * 
+ */
+# define BLACK       0x000000  
+# define WHITE       0xFFFFFF
 
 /**
  * @brief 
