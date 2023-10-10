@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:19:42 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/02 11:26:56 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:49:39 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,16 @@ int	ft_strcmp(char *s1, char *s2)
  */
 double	map(double unscaled_num, double new_min, double new_max, double old_max)
 {
+	double	porcentaje;
+	double	valor_mapeado;
+
 	if (unscaled_num < 0)
 		unscaled_num = 0;
 	else if (unscaled_num > old_max)
 		unscaled_num = old_max;
-    double porcentaje = (unscaled_num - 0) / (old_max - 0);
-    double valorMapeado = new_min + porcentaje * (new_max - new_min);
-	return valorMapeado;
+	porcentaje = (unscaled_num - 0) / (old_max - 0);
+	valor_mapeado = new_min + porcentaje * (new_max - new_min);
+	return (valor_mapeado);
 }
 
 /**

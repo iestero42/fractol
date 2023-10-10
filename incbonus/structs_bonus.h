@@ -6,12 +6,19 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 08:29:25 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/29 08:59:40 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:17:55 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCS_BONUS_H
 # define STRUCS_BONUS_H
+
+typedef struct s_colors
+{
+	int r;
+	int g;
+	int b;	
+}	t_colors;
 
 /**
  * @brief 
@@ -58,12 +65,15 @@ typedef struct s_fractol {
 	char			*name;
 	void			*mlx;
 	void			*mlx_win;
+	void			*win_prnt;
 	int				cmplx_precision;
 	int				button_pressed;
+	int				key_pressed;
 	double			zoom;
 	double			escape_value;
 	t_info			info_frt;
 	t_data			img_data;
+	t_colors		colors;
 }	t_fractol;
 
 #endif

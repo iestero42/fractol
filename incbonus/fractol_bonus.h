@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/10/02 11:33:31 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:57:15 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@
  * 
  */
 # include "libft.h"
+# include "ft_printf.h"
+# include "get_next_line.h"
 # include "structs_bonus.h"
 # include "events_bonus.h"
-# include "complex_math_bonus.h"
+# include "math_bonus.h"
+# include "colors_bonus.h"
 
 /**
  * @brief 
@@ -43,6 +46,13 @@
  * @brief 
  * 
  */
+# define WIDTH_FRACTAL	400
+# define HEIGHT_FRACTAL	400
+
+/**
+ * @brief 
+ * 
+ */
 # define BLACK       0x000000  
 # define WHITE       0xFFFFFF
 
@@ -50,11 +60,11 @@
  * @brief 
  * 
  */
-# define ERROR_MESSAGE "\n usage: /fract-ol [set] [function] [real] [img] \n \
+# define ERROR_MESSAGE "\n usage: /fract-ol_bonus [set] [function] [real] [img] \n \
 \t\t  [power]						  \n\n \
-If the the set is mandelbrot, you only need to put the first parameter. For example: \n \
+If the the set is mandelbrot, you must put the first parameter only. For example: \n \
 \t -> /fract-ol mandelbrot \n\n \
-If the set is julia, you have to put all the parameters. For example: \n \
+If the set is julia, you must put all the parameters. For example: \n \
 \t -> /fract-ol julia polinomic 0.2 0 2 \n\n \
 The possible values for the function parameter are: \n \
 \t -> polinomic \n \
@@ -66,19 +76,15 @@ void					fractol_init(t_fractol *fractal);
 
 int						fractol_render(t_fractol *fractal);
 
-double					map(double unscaled_num, double new_min,
-							double new_max, double old_max);
+void					fractal_render_img(t_fractol *fractal);
 
 void					my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-int						ft_strcmp(char *s1, char *s2);
-
-double					ft_atod(char *s);
-
-unsigned long long int	binomialcoeff(int n, int k);
-
 void					*choose_ft(t_fractol *fractol);
 
+void					choose_fractal(t_complex *z, t_complex *c,
+							t_fractol *fractal);
 
+void					mlx_error(char *msg_error);
 
 #endif

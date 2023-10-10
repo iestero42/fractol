@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:09:38 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/29 08:36:06 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/10 09:56:41 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define ESCAPE 53
 # define PLUS 69
 # define MINUS 78
+# define LTR_P 35
+
 # define MOUSE_FWD 05
 # define MOUSE_BCW 04
 # define MOUSE_L 1

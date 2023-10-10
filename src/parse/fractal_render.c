@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:53 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/29 11:50:11 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:57:10 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ static void	fractal_render_img(t_fractol *fractal)
 	win.addr = mlx_get_data_addr(win.img,
 			&win.bits_per_pixel,
 			&win.line_length, &win.endian);
-	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win, win.img,
-		1200, 0);
+	mlx_put_image_to_window(fractal->mlx, fractal->win_prnt, win.img,
+		1300, 0);
+	mlx_destroy_image(fractal->mlx, win.img);
 }
 
 /**
@@ -39,7 +40,7 @@ static void	fractal_render_img(t_fractol *fractal)
  * @param c 
  * @param fractal 
  */
-static void	choose_fractal(t_complex *z, t_complex *c, t_fractol *fractal)
+void	choose_fractal(t_complex *z, t_complex *c, t_fractol *fractal)
 {	
 	if (!ft_strcmp(fractal->name, "julia"))
 	{
@@ -51,24 +52,6 @@ static void	choose_fractal(t_complex *z, t_complex *c, t_fractol *fractal)
 		c->real = z->real;
 		c->img = z->img;
 	}
-}
-
-/**
- * @brief
- * 
- * @param i 
- * @param iterations 
- * @return int 
- */
-static int	interpolation( double t)
-{
-	int	raw_color;
-
-	raw_color = create_trgb(0,
-		(int)(9 * ( 1 - t ) * t * t * t  * 255),
-		(int)(15 * ( 1 - t ) * t * t * 255),
-		(int)(8.5 * ( 1 - t ) * t * 120));
-	return (raw_color % 0xFFFFFF);
 }
 
 /**
@@ -85,8 +68,8 @@ static void	handle_pixel(int x, int y, t_fractol *fractal)
 	int			i;
 	int			color;
 
-	z.real = map(x, -2, +2, WIDTH / 1.5) * fractal->zoom;
-	z.img = map(y, +1.3, -1.3, HEIGHT / 1.5) * fractal->zoom;
+	z.real = map(x, -2, +2, WIDTH_FRACTAL) * fractal->zoom;
+	z.img = map(y, +2, -2, HEIGHT_FRACTAL) * fractal->zoom;
 	choose_fractal(&z, &c, fractal);
 	i = -1;
 	while (++i < fractal->cmplx_precision)
@@ -113,17 +96,16 @@ int	fractol_render(t_fractol *fractal)
 	int	y;
 
 	y = -1;
-	while (++y < HEIGHT / 1.5)
+	while (++y < HEIGHT_FRACTAL)
 	{
 		x = -1;
-		while (++x < WIDTH / 1.5)
+		while (++x < WIDTH_FRACTAL)
 		{
 			handle_pixel(x, y, fractal);
 		}
 	}
 	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win,
-		fractal->img_data.img, (WIDTH - (WIDTH / 1.5)) / 20,
-		(HEIGHT - (HEIGHT / 1.5)) / 2);
+		fractal->img_data.img, 0, 0);
 	fractal_render_img(fractal);
 	return (0);
 }

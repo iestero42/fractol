@@ -6,26 +6,11 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:32:50 by iestero-          #+#    #+#             */
-/*   Updated: 2023/09/29 08:31:19 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/10 10:09:08 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-/**
- * @brief 
- * 
- * @param fractol 
- */
-int	close_handler(t_fractol *fractol)
-{
-	mlx_destroy_image(fractol->mlx,
-		fractol->img_data.img);
-	mlx_destroy_window(fractol->mlx,
-		fractol->mlx_win);
-	free(fractol->mlx);
-	exit(EXIT_SUCCESS);
-}
 
 /**
  * @brief 
@@ -40,6 +25,11 @@ int	key_handler(int key, t_fractol *fractol)
 		fractol->cmplx_precision += 1;
 	else if (key == MINUS)
 		fractol->cmplx_precision -= 1;
+	else if (key == LTR_P)
+	{
+		render_screenshot(fractol);
+		return (0);
+	}
 	fractol_render(fractol);
 	return (0);
 }
@@ -95,9 +85,9 @@ int	julia_track(int x, int y, struct s_fractol *fractal)
 	x = y;
 	if (!ft_strcmp(fractal->name, "julia") && fractal->button_pressed)
 	{
-		fractal->info_frt.z.real = (map(x, -2, +2, WIDTH / 1.5)
+		fractal->info_frt.z.real = (map(x, -2, +2, WIDTH_FRACTAL)
 				* fractal->zoom);
-		fractal->info_frt.z.img = (map(y, +1.3, -1.3, HEIGHT / 1.5)
+		fractal->info_frt.z.img = (map(y, +2, -2, HEIGHT_FRACTAL)
 				* fractal->zoom);
 		fractol_render(fractal);
 	}

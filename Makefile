@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/10/02 09:15:41 by iestero-         ###   ########.fr        #
+#    Updated: 2023/10/10 10:12:21 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,10 +90,11 @@ PARSE_FILES	=	fractal_init.c			\
 				colors.c				\
 				choose_ft.c				\
 				ft_julia.c				\
+				events.c				\
 
 UTILS_FILES	=	math_utils.c		\
 				pixel_put.c			\
-				events.c			\
+				events_utils.c		\
 				ft_atod.c			\
 
 
@@ -115,11 +116,13 @@ PARSE_BONUS_FILES	=	fractal_init_bonus.c			\
 						fractal_render_bonus.c			\
 						choose_ft_bonus.c				\
 						ft_julia_bonus.c				\
+						colors_bonus.c					\
+						events_bonus.c					\
 
 UTILS_BONUS_FILES	=	math_utils_bonus.c			\
 						pixel_put_bonus.c			\
-						events_bonus.c				\
 						ft_atod_bonus.c				\
+						event_utils_bonus.c			\
 
 SRCSBONUS_FILES		=	$(addprefix $(MAIN_DIR)/, $(MAIN_BONUS_ILES)) 		\
 						$(addprefix $(UTILS_DIR)/, $(UTILS_BONUS_FILES)) 	\
