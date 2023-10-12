@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 10:06:21 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/10 11:45:37 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:51:55 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	sum_shift(double zoom, int x, int y, t_fractol *fractol)
 	fractol->zoom *= zoom;
 	fractol->info_frt.shift_x += (map(x, -2.0, +2.0, WIDTH_FRACTAL)
 			* fractol->zoom) * 0.235;
-	fractol->info_frt.shift_y += (map(y, +1.3, -1.3, HEIGHT_FRACTAL)
+	fractol->info_frt.shift_y += (map(y, +2, -2, HEIGHT_FRACTAL)
 			* fractol->zoom) * 0.235;
 }
 
@@ -77,7 +77,7 @@ static t_data	img_init(t_fractol *fractal)
  * @param y 
  * @param fractal 
  */
-static void	handle_pixel(int x, int y, t_fractol *fractal, t_data *img)
+static void	handle_pixel_scr(int x, int y, t_fractol *fractal, t_data *img)
 {
 	t_complex	z;
 	t_complex	c;
@@ -122,7 +122,7 @@ int	render_screenshot(t_fractol *fractal)
 		x = -1;
 		while (++x < WIDTH / 1.5)
 		{
-			handle_pixel(x, y, fractal, &img);
+			handle_pixel_scr(x, y, fractal, &img);
 		}
 	}
 	mlx_put_image_to_window(fractal->mlx, fractal->win_prnt,

@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:37 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/10 11:26:55 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:10:18 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	mlx_error(char *msg_error)
 static void	data_init(t_fractol *fractol)
 {
 	fractol->escape_value = 2;
-	fractol->cmplx_precision = 42;
+	fractol->cmplx_precision = 30;
 	fractol->zoom = 1.0;
 	fractol->button_pressed = 0;
 	fractol->info_frt.shift_x = 0.0;
@@ -38,6 +38,13 @@ static void	data_init(t_fractol *fractol)
 	fractol->colors.r = 255;
 	fractol->colors.g = 150;
 	fractol->colors.b = 100;
+	if (!ft_strcmp(fractol->name, "nova"))
+	{
+		init_nova(fractol);
+		fractol->ft = handle_pixel_nova;
+	}
+	else
+		fractol->ft = handle_pixel;
 	fractal_render_img(fractol);
 }
 

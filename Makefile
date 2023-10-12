@@ -6,14 +6,14 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/10/10 10:12:21 by iestero-         ###   ########.fr        #
+#    Updated: 2023/10/12 10:31:47 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variable
 
-NAME				=	fract-ol
-BONUS				=	fract-ol_bonus
+NAME				=	fractol
+BONUS				=	fractol_bonus
 
 GREEN 				= 	\033[0;32m
 LIGHT_GRAY 			= 	\033[90m
@@ -118,6 +118,7 @@ PARSE_BONUS_FILES	=	fractal_init_bonus.c			\
 						ft_julia_bonus.c				\
 						colors_bonus.c					\
 						events_bonus.c					\
+						nova_bonus.c					\
 
 UTILS_BONUS_FILES	=	math_utils_bonus.c			\
 						pixel_put_bonus.c			\

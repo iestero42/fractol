@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:06:21 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/10 11:48:10 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/12 10:15:56 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_complex				divide_complex(t_complex a, t_complex b);
 
 t_complex				sum_complex(t_complex num1, t_complex num2);
 
+t_complex				nova_ft(t_complex z, t_complex c, t_fractol *fractol);
+
 double					ft_atod(char *s);
 
 double					map(double unscaled_num, double new_min,
@@ -42,5 +44,7 @@ double					map(double unscaled_num, double new_min,
 
 
 int						ft_strcmp(char *s1, char *s2);
+
+void					init_nova(t_fractol *fractol);
 
 #endif

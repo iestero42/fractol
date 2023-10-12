@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 08:29:25 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/10 10:17:55 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:48:15 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,19 @@ typedef struct s_info
 	
 }	t_info;
 
+typedef struct s_nova
+{
+	t_complex	roots[3];
+	int			colors[3];
+	t_complex	diff;
+}	t_nova;
+
 /**
  * @brief 
  * 
  */
 typedef struct s_fractol {
+	int				(*ft)(int x, int y, struct s_fractol *);
 	char			*name;
 	void			*mlx;
 	void			*mlx_win;
@@ -74,6 +82,7 @@ typedef struct s_fractol {
 	t_info			info_frt;
 	t_data			img_data;
 	t_colors		colors;
+	t_nova			nova;
 }	t_fractol;
 
 #endif

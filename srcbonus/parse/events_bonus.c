@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:32:50 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/10 10:48:17 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:22:11 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ int	mouse__release_handler(int button, int x, int y, t_fractol *fractol)
 int	julia_track(int x, int y, struct s_fractol *fractal)
 {
 	x = y;
-	if (!ft_strcmp(fractal->name, "julia") && fractal->button_pressed)
+	if ((!ft_strcmp(fractal->name, "julia")
+			|| !ft_strcmp(fractal->name, "nova"))
+		&& fractal->button_pressed)
 	{
 		fractal->info_frt.z.real = (map(x, -2, +2, WIDTH_FRACTAL)
 				* fractal->zoom) + fractal->info_frt.shift_x;

@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/10/10 11:57:15 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:53:40 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,8 @@
  * @brief 
  * 
  */
-# define WIDTH_FRACTAL	400
-# define HEIGHT_FRACTAL	400
-
-/**
- * @brief 
- * 
- */
-# define BLACK       0x000000  
-# define WHITE       0xFFFFFF
+# define WIDTH_FRACTAL	300
+# define HEIGHT_FRACTAL	300
 
 /**
  * @brief 
@@ -86,5 +79,9 @@ void					choose_fractal(t_complex *z, t_complex *c,
 							t_fractol *fractal);
 
 void					mlx_error(char *msg_error);
+
+int						handle_pixel(int x, int y, t_fractol *fractal);
+
+int						handle_pixel_nova(int x, int y, t_fractol *fractal);
 
 #endif
