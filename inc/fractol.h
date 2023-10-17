@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/10/10 11:57:35 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:02:57 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@
  * @brief 
  * 
  */
-# define ERROR_MESSAGE "\n usage: /fract-ol [set] [function] [real] [img] \n \
+# define ERROR_MESSAGE "\n usage: /fractol [set] [function] [real] [img] \n \
 \t\t  [power]						  \n\n \
 If the the set is mandelbrot, you must put the first parameter only. For example: \n \
-\t -> /fract-ol mandelbrot \n\n \
+\t -> /fractol mandelbrot \n\n \
 If the set is julia, you must put all the parameters. For example: \n \
-\t -> /fract-ol julia polinomic 0.2 0 2 \n\n \
+\t -> /fractol julia polinomic 0.2 0 2 \n\n \
 The possible values for the function parameter are: \n \
 \t -> polinomic \n \
 \t -> polinomic-exp \n \

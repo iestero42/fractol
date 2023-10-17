@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 08:29:25 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/12 11:48:15 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:41:50 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,18 @@ typedef struct s_data {
  */
 typedef struct s_info
 {
-	char		*name;
-	t_complex	z;
-	t_complex	(*ft)(struct s_complex, struct s_complex, void *param);
-	double		power;
-	double		shift_x;
-	double		shift_y;
+	char			*name;
+	t_complex		z;
+	t_complex		(*ft)(struct s_complex, struct s_complex, void *param);
+	unsigned int	power;
+	double			shift_x;
+	double			shift_y;
 	
 }	t_info;
 
 typedef struct s_nova
 {
-	t_complex	roots[3];
-	int			colors[3];
+	t_complex	*roots;
 	t_complex	diff;
 }	t_nova;
 
@@ -74,9 +73,9 @@ typedef struct s_fractol {
 	void			*mlx;
 	void			*mlx_win;
 	void			*win_prnt;
-	int				cmplx_precision;
-	int				button_pressed;
-	int				key_pressed;
+	unsigned int	cmplx_precision;
+	unsigned int	button_pressed;
+	unsigned int	key_pressed;
 	double			zoom;
 	double			escape_value;
 	t_info			info_frt;

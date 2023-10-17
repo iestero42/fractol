@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:33:58 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/10 10:30:17 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:01:31 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	close_handler(t_fractol *fractol)
 		fractol->mlx_win);
 	mlx_destroy_window(fractol->mlx,
 		fractol->win_prnt);
-	free(fractol->mlx);
 	exit(EXIT_SUCCESS);
 }
 

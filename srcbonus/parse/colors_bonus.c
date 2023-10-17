@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:02:25 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/12 08:42:00 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:11:46 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
+/**
+ * @brief 
+ * 
+ * @param color 
+ */
 static void	init_color(int *color)
 {
 	int	i;
@@ -35,6 +40,11 @@ static void	init_color(int *color)
 		color[i++] = 0;
 }
 
+/**
+ * @brief 
+ * 
+ * @param fractol 
+ */
 void	change_color(t_fractol *fractol)
 {
 	char	*line;

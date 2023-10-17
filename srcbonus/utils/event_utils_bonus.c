@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 10:06:21 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/12 11:51:55 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:02:39 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,18 @@ int	close_handler(t_fractol *fractol)
 		fractol->mlx_win);
 	mlx_destroy_window(fractol->mlx,
 		fractol->win_prnt);
-	free(fractol->mlx);
+	if (!ft_strcmp(fractol->name, "nova"))
+		free(fractol->nova.roots);
 	exit(EXIT_SUCCESS);
 }
 
 void	sum_shift(double zoom, int x, int y, t_fractol *fractol)
 {
-	if (zoom < 1)
-		fractol->cmplx_precision += 1;
-	else
-		fractol->cmplx_precision -= 1;
 	fractol->zoom *= zoom;
 	fractol->info_frt.shift_x += (map(x, -2.0, +2.0, WIDTH_FRACTAL)
-			* fractol->zoom) * 0.235;
+			* fractol->zoom) * 0.1995;
 	fractol->info_frt.shift_y += (map(y, +2, -2, HEIGHT_FRACTAL)
-			* fractol->zoom) * 0.235;
+			* fractol->zoom) * 0.1995;
 }
 
 /**
@@ -77,12 +74,11 @@ static t_data	img_init(t_fractol *fractal)
  * @param y 
  * @param fractal 
  */
-static void	handle_pixel_scr(int x, int y, t_fractol *fractal, t_data *img)
+static int	handle_pixel_scr(int x, int y, t_fractol *fractal)
 {
-	t_complex	z;
-	t_complex	c;
-	int			i;
-	int			color;
+	t_complex		z;
+	t_complex		c;
+	unsigned int	i;
 
 	z.real = (map(x, -2, +2, WIDTH / 1.5)
 			* fractal->zoom) + fractal->info_frt.shift_x;
@@ -94,14 +90,10 @@ static void	handle_pixel_scr(int x, int y, t_fractol *fractal, t_data *img)
 	{
 		z = fractal->info_frt.ft(z, c, fractal);
 		if (hypot(z.real, z.img) >= fractal->escape_value)
-		{
-			color = interpolation((double) i / fractal->cmplx_precision,
-					fractal);
-			my_mlx_pixel_put(img, x, y, color);
-			return ;
-		}
+			return (interpolation((double) i / fractal->cmplx_precision,
+					fractal));
 	}
-	my_mlx_pixel_put(img, x, y, BLACK);
+	return (BLACK);
 }
 
 /**
@@ -113,6 +105,7 @@ int	render_screenshot(t_fractol *fractal)
 {
 	int		x;
 	int		y;
+	int		color;
 	t_data	img;
 
 	img = img_init(fractal);
@@ -122,7 +115,11 @@ int	render_screenshot(t_fractol *fractal)
 		x = -1;
 		while (++x < WIDTH / 1.5)
 		{
-			handle_pixel_scr(x, y, fractal, &img);
+			if (!ft_strcmp(fractal->name, "nova"))
+				color = handle_pixel_nova_scr(x, y, fractal);
+			else
+				color = handle_pixel_scr(x, y, fractal);
+			my_mlx_pixel_put(&img, x, y, color);
 		}
 	}
 	mlx_put_image_to_window(fractal->mlx, fractal->win_prnt,

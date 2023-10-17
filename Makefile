@@ -6,7 +6,7 @@
 #    By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 10:56:39 by yunlovex          #+#    #+#              #
-#    Updated: 2023/10/12 10:31:47 by iestero-         ###   ########.fr        #
+#    Updated: 2023/10/17 09:56:26 by iestero-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,9 +66,9 @@ LDLIBS_BONUS		=	$(LIBFRACTOL_BONUS) $(LIBFT)
 
 CC					=	gcc
 
-CFLAGS				=	-g -Wall -Werror -Wextra $(INCLUDES)
+CFLAGS				=	-g -Wall -Werror -Wextra $(INCLUDES) 
 CFLAGS_BONUS		=	-g -Wall -Werror -Wextra $(INCLUDES_BONUS)
-LDFLAGS				=	$(LDLIBS) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
+LDFLAGS				=   $(LDLIBS) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 LDFLAGS_BONUS		=	$(LDLIBS_BONUS) -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 INCLUDES			=	-I$(INC_DIR) -I$(addsuffix $(INC_DIR), $(LIBFT_DIR)/) -I$(MINILIBX_DIR)
 INCLUDES_BONUS		=	-I$(INCBONUS_DIR) -I$(addsuffix $(INC_DIR), $(LIBFT_DIR)/) -I$(MINILIBX_DIR)
@@ -124,6 +124,7 @@ UTILS_BONUS_FILES	=	math_utils_bonus.c			\
 						pixel_put_bonus.c			\
 						ft_atod_bonus.c				\
 						event_utils_bonus.c			\
+						event_utils2_bonus.c		\
 
 SRCSBONUS_FILES		=	$(addprefix $(MAIN_DIR)/, $(MAIN_BONUS_ILES)) 		\
 						$(addprefix $(UTILS_DIR)/, $(UTILS_BONUS_FILES)) 	\

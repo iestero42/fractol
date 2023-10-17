@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:56:58 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/12 10:06:01 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/16 09:39:56 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ void	*choose_ft(t_fractol *fractol)
 			t = polinomic_exp_ft;
 		else if (!ft_strcmp(fractol->info_frt.name, "polinomic-sin"))
 			t = polinomic_sin_ft;
-	}
-	else if (!ft_strcmp(fractol->name, "nova"))
-	{
-		t = nova_ft;
 	}
 	return (t);
 }

@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:53 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/12 12:12:40 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:42:58 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	fractal_render_img(t_fractol *fractal)
  */
 void	choose_fractal(t_complex *z, t_complex *c, t_fractol *fractal)
 {	
-	if (!ft_strcmp(fractal->name, "julia") || !ft_strcmp(fractal->name, "nova"))
+	if (!ft_strcmp(fractal->name, "julia"))
 	{
 		c->real = fractal->info_frt.z.real;
 		c->img = fractal->info_frt.z.img;
@@ -63,10 +63,10 @@ void	choose_fractal(t_complex *z, t_complex *c, t_fractol *fractal)
  */
 int	handle_pixel(int x, int y, t_fractol *fractal)
 {
-	t_complex	z;
-	t_complex	c;
-	int			i;
-	int			color;
+	t_complex		z;
+	t_complex		c;
+	unsigned int	i;
+	int				color;
 
 	z.real = (map(x, -2, +2, WIDTH_FRACTAL)
 			* fractal->zoom) + fractal->info_frt.shift_x;
@@ -96,28 +96,26 @@ int	handle_pixel(int x, int y, t_fractol *fractal)
  */
 int	handle_pixel_nova(int x, int y, t_fractol *fractal)
 {
-	t_complex	z;
-	t_complex	c;
-	int			i;
-	int			j;
+	t_complex		z;
+	unsigned int	i;
+	int				j;
 
 	z.real = (map(x, -1, +1, WIDTH_FRACTAL)
 			* fractal->zoom) + fractal->info_frt.shift_x;
 	z.img = (map(y, +1, -1, HEIGHT_FRACTAL)
 			* fractal->zoom) + fractal->info_frt.shift_y;
-	choose_fractal(&z, &c, fractal);
 	i = -1;
 	while (++i < fractal->cmplx_precision)
 	{
-		z = fractal->info_frt.ft(z, c, fractal);
+		z = nova_ft(z, fractal);
 		j = -1;
 		while (++j < 3)
 		{
 			fractal->nova.diff.real = z.real - fractal->nova.roots[j].real;
 			fractal->nova.diff.img = z.img - fractal->nova.roots[j].img;
-			if (fabs(fractal->nova.diff.real) < 0.000001
-				&& fabs(fractal->nova.diff.img) < 0.000001)
-				return (fractal->nova.colors[j]);
+			if (fabs(fractal->nova.diff.real) < 0.00001
+				&& fabs(fractal->nova.diff.img) < 0.00001)
+				return (interpolation((double) i / 100, fractal));
 		}
 	}
 	return (BLACK);

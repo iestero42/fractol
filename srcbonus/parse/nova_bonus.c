@@ -6,48 +6,54 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 07:41:48 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/12 12:10:00 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:54:28 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
 
-static void	create_complex(t_complex *x, double real, double imag)
+void	encontrar_raices(int n, t_fractol *fractal)
 {
-	x->real = real;
-	x->img = imag;
-}
+	int			k;
+	double		theta;
+	t_complex	raiz;
 
-static void	colors_selected(t_fractol *fractol)
-{
-	fractol->nova.colors[0] = LAVA_RED;
-	fractol->nova.colors[1] = BLUE;
-	fractol->nova.colors[2] = BLACK;
+	k = 0;
+	while (k < n)
+	{
+		theta = (2.0 * M_PI * k) / n;
+		raiz.real = cos(theta);
+		raiz.img = sin(theta);
+		fractal->nova.roots[k] = raiz;
+		k++;
+	}
 }
 
 void	init_nova(t_fractol *fractol)
 {
-	colors_selected(fractol);
-	create_complex(&fractol->nova.roots[0], 1, 0);
-	create_complex(&fractol->nova.roots[1], -0.5, sqrt(3) / 2);
-	create_complex(&fractol->nova.roots[2], -0.5, -sqrt(3) / 2);
+	fractol->nova.roots = (t_complex *) malloc(sizeof(t_complex)
+			* fractol->info_frt.power);
+	if (fractol->nova.roots == NULL)
+	{
+		perror("init_nova");
+		exit(EXIT_FAILURE);
+	}
+	encontrar_raices(fractol->info_frt.power, fractol);
 }
 
-t_complex	nova_ft(t_complex z, t_complex c, t_fractol *fractol)
+t_complex	nova_ft(t_complex z, t_fractol *fractol)
 {
 	t_complex	result;
 	t_complex	result2;
 	t_complex	new_z;
-	t_complex	f;
 
-	create_complex(&f, -1, 0);
-	new_z = sum_complex(power_complex(z, fractol->info_frt.power), f);
-	result2 = power_complex(z, 2);
-	result2.img *= 3;
-	result2.real *= 3;
+	new_z = power_complex(z, fractol->info_frt.power);
+	new_z.real -= 1.0;
+	result2 = power_complex(z, fractol->info_frt.power - 1);
+	result2.img *= fractol->info_frt.power;
+	result2.real *= fractol->info_frt.power;
 	result = divide_complex(new_z, result2);
 	result2.real = z.real - result.real;
 	result2.img = z.img - result.img;
-	result = sum_complex(result2, c);
-	return (result);
+	return (result2);
 }

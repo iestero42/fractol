@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 09:15:45 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/12 10:53:22 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:07:52 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 static void	nova_init(t_fractol *fractal, char **argv)
 {
 	fractal->name = argv[1];
-	fractal->info_frt.z.real = ft_atod(argv[2]);
-	fractal->info_frt.z.img = ft_atod(argv[3]);
-	fractal->info_frt.power = ft_atod(argv[4]);
+	fractal->info_frt.power = ft_atoi(argv[2]);
+	init_nova(fractal);
 }
 
 /**
@@ -50,7 +49,7 @@ int	main(int agc, char **argv)
 		fractal.name = argv[1];
 	else if (agc == 6 && !ft_strcmp(argv[1], "julia"))
 		init_julia(&fractal, argv);
-	else if (agc == 5 && !ft_strcmp(argv[1], "nova"))
+	else if (agc == 3 && !ft_strcmp(argv[1], "nova"))
 		nova_init(&fractal, argv);
 	else
 	{

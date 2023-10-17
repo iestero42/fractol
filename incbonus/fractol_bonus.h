@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/10/12 11:53:40 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:14:29 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,18 @@
  * @brief 
  * 
  */
-# define ERROR_MESSAGE "\n usage: /fract-ol_bonus [set] [function] [real] [img] \n \
+# define ERROR_MESSAGE "\n usage: /fractol_bonus [set] [function] [real] [img] \n \
 \t\t  [power]						  \n\n \
 If the the set is mandelbrot, you must put the first parameter only. For example: \n \
-\t -> /fract-ol mandelbrot \n\n \
+\t -> /fractol_bonus mandelbrot \n\n \
 If the set is julia, you must put all the parameters. For example: \n \
-\t -> /fract-ol julia polinomic 0.2 0 2 \n\n \
+\t -> /fractol_bonus julia polinomic 0.2 0 2 \n\n \
 The possible values for the function parameter are: \n \
 \t -> polinomic \n \
 \t -> polinomic-exp \n \
-\t -> polinomic-sin \n "
+\t -> polinomic-sin \n \
+if the set is nova, you must put only the [set] and [power] parameters. For example: \n \
+\t -> /fractol_bonus nova 3 \n"
 
 
 void					fractol_init(t_fractol *fractal);
@@ -83,5 +85,9 @@ void					mlx_error(char *msg_error);
 int						handle_pixel(int x, int y, t_fractol *fractal);
 
 int						handle_pixel_nova(int x, int y, t_fractol *fractal);
+
+int						handle_pixel_nova_scr(int x, int y, t_fractol *fractal);
+
+void					init_nova(t_fractol *fractol);
 
 #endif

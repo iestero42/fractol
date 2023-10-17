@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:09:38 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/10 10:48:28 by iestero-         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:19:31 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define ARROW_L	123
 # define ARROW_R	124
 # define LTR_P 		35
+# define LTR_R 		15
 
 # define MOUSE_FWD	05
 # define MOUSE_BCW	04
@@ -56,5 +57,7 @@ int			key_release_handler(int key, t_fractol *fractol);
 int			render_screenshot(t_fractol *fractal);
 
 int			key_handler_win2(int key, t_fractol *fractol);
+
+void		reset(t_fractol *fractol);
 
 #endif
