@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2023/10/17 10:14:29 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:43:52 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@
  * @brief 
  * 
  */
-# define WIDTH_FRACTAL	300
-# define HEIGHT_FRACTAL	300
+# define WIDTH_FRACTAL	250
+# define HEIGHT_FRACTAL	250
 
 /**
  * @brief 
