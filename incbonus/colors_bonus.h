@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:05:10 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/12 09:52:21 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:09:55 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define HOT_PINK        0xFF66B2  // As the name suggests!
 # define ELECTRIC_BLUE   0x0066FF  // A radiant blue
 # define LAVA_RED        0xFF3300  // A bright, molten red
-
 
 int			create_trgb(int t, int r, int g, int b);
 

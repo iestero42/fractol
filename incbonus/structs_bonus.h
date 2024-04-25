@@ -6,18 +6,18 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 08:29:25 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/16 10:41:50 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:09:16 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCS_BONUS_H
-# define STRUCS_BONUS_H
+#ifndef STRUCTS_BONUS_H
+# define STRUCTS_BONUS_H
 
 typedef struct s_colors
 {
-	int r;
-	int g;
-	int b;	
+	int	r;
+	int	g;
+	int	b;	
 }	t_colors;
 
 /**
@@ -34,7 +34,8 @@ typedef struct s_complex
  * @brief 
  * 
  */
-typedef struct s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -54,7 +55,6 @@ typedef struct s_info
 	unsigned int	power;
 	double			shift_x;
 	double			shift_y;
-	
 }	t_info;
 
 typedef struct s_nova
@@ -67,7 +67,8 @@ typedef struct s_nova
  * @brief 
  * 
  */
-typedef struct s_fractol {
+typedef struct s_fractol
+{
 	int				(*ft)(int x, int y, struct s_fractol *);
 	char			*name;
 	void			*mlx;

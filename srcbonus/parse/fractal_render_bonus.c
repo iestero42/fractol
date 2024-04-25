@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:53 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/16 10:42:58 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 09:41:52 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	fractal_render_img(t_fractol *fractal)
 	win.addr = mlx_get_data_addr(win.img,
 			&win.bits_per_pixel,
 			&win.line_length, &win.endian);
+	if (!win.addr)
+		mlx_error("mlx_get_data_addr");
 	mlx_put_image_to_window(fractal->mlx, fractal->win_prnt, win.img,
 		1300, 0);
 	mlx_destroy_image(fractal->mlx, win.img);
@@ -41,7 +43,7 @@ void	fractal_render_img(t_fractol *fractal)
  * @param fractal 
  */
 void	choose_fractal(t_complex *z, t_complex *c, t_fractol *fractal)
-{	
+{
 	if (!ft_strcmp(fractal->name, "julia"))
 	{
 		c->real = fractal->info_frt.z.real;

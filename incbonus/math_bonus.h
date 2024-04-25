@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:06:21 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/16 11:01:05 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:08:42 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ double					ft_atod(char *s);
 
 double					map(double unscaled_num, double new_min,
 							double new_max, double old_max);
-
 
 int						ft_strcmp(char *s1, char *s2);
 

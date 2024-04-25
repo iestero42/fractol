@@ -6,12 +6,12 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 08:29:25 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/16 10:57:16 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:09:46 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCS_H
-# define STRUCS_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 /**
  * @brief 
@@ -27,7 +27,8 @@ typedef struct s_complex
  * @brief 
  * 
  */
-typedef struct s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -45,14 +46,14 @@ typedef struct s_info
 	t_complex	z;
 	t_complex	(*ft)(struct s_complex, struct s_complex, void *param);
 	double		power;
-	
 }	t_info;
 
 /**
  * @brief 
  * 
  */
-typedef struct s_fractol {
+typedef struct s_fractol
+{
 	char			*name;
 	void			*mlx;
 	void			*mlx_win;

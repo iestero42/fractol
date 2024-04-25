@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:44:37 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/16 10:31:14 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 09:41:44 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	window_init(t_fractol *fractal)
 	{
 		mlx_destroy_window(fractal->mlx, fractal->mlx_win);
 		free(fractal->mlx);
-		mlx_error("");
+		mlx_error("mlx_new_window");
 	}
 	fractal->win_prnt = mlx_new_window(fractal->mlx,
 			WIDTH, HEIGHT, fractal->name);
@@ -85,7 +85,7 @@ static void	window_init(t_fractol *fractal)
 		mlx_destroy_window(fractal->mlx, fractal->win_prnt);
 		mlx_destroy_window(fractal->mlx, fractal->mlx_win);
 		free(fractal->mlx);
-		mlx_error("");
+		mlx_error("mlx_new_window");
 	}
 }
 
@@ -107,11 +107,13 @@ void	fractol_init(t_fractol *fractal)
 		mlx_destroy_image(fractal->mlx, fractal->img_data.img);
 		mlx_destroy_window(fractal->mlx, fractal->mlx_win);
 		free(fractal->mlx);
-		mlx_error("");
+		mlx_error("mlx_new_image");
 	}
 	fractal->img_data.addr = mlx_get_data_addr(fractal->img_data.img,
 			&fractal->img_data.bits_per_pixel,
 			&fractal->img_data.line_length, &fractal->img_data.endian);
+	if (!fractal->img_data.addr)
+		mlx_error("mlx_get_data_addr");
 	data_init(fractal);
 	event_init(fractal);
 }

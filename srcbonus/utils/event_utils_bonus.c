@@ -6,12 +6,11 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 10:06:21 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/17 10:02:39 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:07:20 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
-
 
 /**
  * @brief 
@@ -64,6 +63,8 @@ static t_data	img_init(t_fractol *fractal)
 	img.addr = mlx_get_data_addr(img.img,
 			&img.bits_per_pixel,
 			&img.line_length, &img.endian);
+	if (!img.addr)
+		mlx_error("mlx_get_data_addr");
 	return (img);
 }
 

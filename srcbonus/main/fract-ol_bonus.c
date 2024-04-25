@@ -6,11 +6,33 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 09:15:45 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/17 10:07:52 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:32:14 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_bonus.h"
+
+static int	check_digit(char *str)
+{
+	int	i;
+	int	dot;
+
+	i = -1;
+	dot = 0;
+	while (str[++i] != '\0')
+	{
+		if (str[i] == '.' && dot == 0)
+		{
+			dot = 1;
+			continue ;
+		}
+		if (str[i] == '-' && i == 0 && str[i + 1] != '\0')
+			continue ;
+		if (!ft_isdigit(str[i]))
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
 
 /**
  * @brief 
@@ -47,9 +69,10 @@ int	main(int agc, char **argv)
 	if (agc == 2 && (!ft_strcmp(argv[1], "mandelbrot")
 			|| !ft_strcmp(argv[1], "nova")))
 		fractal.name = argv[1];
-	else if (agc == 6 && !ft_strcmp(argv[1], "julia"))
+	else if (agc == 6 && !ft_strcmp(argv[1], "julia") && !check_digit(argv[3])
+		&& !check_digit(argv[4]) && !check_digit(argv[5]))
 		init_julia(&fractal, argv);
-	else if (agc == 3 && !ft_strcmp(argv[1], "nova"))
+	else if (agc == 3 && !ft_strcmp(argv[1], "nova") && !check_digit(argv[2]))
 		nova_init(&fractal, argv);
 	else
 	{

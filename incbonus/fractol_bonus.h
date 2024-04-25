@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:15:38 by yunlovex          #+#    #+#             */
-/*   Updated: 2024/04/23 11:43:52 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 10:08:28 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ The possible values for the function parameter are: \n \
 \t -> polinomic-sin \n \
 if the set is nova, you must put only the [set] and [power] parameters. For example: \n \
 \t -> /fractol_bonus nova 3 \n"
-
 
 void					fractol_init(t_fractol *fractal);
 

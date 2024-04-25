@@ -6,7 +6,7 @@
 /*   By: iestero- <iestero-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 09:33:58 by iestero-          #+#    #+#             */
-/*   Updated: 2023/10/17 10:01:31 by iestero-         ###   ########.fr       */
+/*   Updated: 2024/04/25 09:21:55 by iestero-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ static t_data	img_init(t_fractol *fractal)
 		mlx_destroy_window(fractal->mlx, fractal->mlx_win);
 		mlx_destroy_window(fractal->mlx, fractal->win_prnt);
 		free(fractal->mlx);
-		mlx_error("");
+		mlx_error("mlx_new_image");
 	}
 	img.addr = mlx_get_data_addr(img.img,
 			&img.bits_per_pixel,
 			&img.line_length, &img.endian);
+	if (!img.addr)
+		mlx_error("mlx_get_data_addr");
 	return (img);
 }
 
@@ -97,9 +99,7 @@ int	render_screenshot(t_fractol *fractal)
 	{
 		x = -1;
 		while (++x < WIDTH / 1.5)
-		{
 			handle_pixel(x, y, fractal, &img);
-		}
 	}
 	mlx_put_image_to_window(fractal->mlx, fractal->win_prnt,
 		img.img, (WIDTH - (WIDTH / 1.5)) / 20,
